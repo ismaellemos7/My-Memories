@@ -12,8 +12,6 @@ A pessoas estão cada vez mais preocupadas com a segurança dos seus dados na in
 -	Usuário
 -	Amigo
 -	Lembrança
--	Anotação
--	Data Especial
 
 ## Tipos de classificação de memorias:
 -	Por Data -> ano  ->mês  ->dia ->estação 
