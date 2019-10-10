@@ -27,5 +27,5 @@ A pessoas estão cada vez mais preocupadas com a segurança dos seus dados na in
 - Notificação de ativaçaõ de conta de contato
 
 
-## Limguagem:
+## Linguagem:
 - Java
