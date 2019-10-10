@@ -24,7 +24,7 @@ A pessoas estão cada vez mais preocupadas com a segurança dos seus dados na in
 - listar contato
 - excluir contato
 - editar contato
-- Notificação de ativaçaõ de conta de contato
+- Notificação de ativação de conta de contato
 
 
 ## Linguagem:
