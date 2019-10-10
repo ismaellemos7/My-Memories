@@ -13,11 +13,19 @@ A pessoas estão cada vez mais preocupadas com a segurança dos seus dados na in
 -	Amigo
 -	Lembrança
 
-## Tipos de classificação de memorias:
--	Por Data -> ano  ->mês  ->dia ->estação 
--	Eventos  -> Aniversário  -> Acadêmica  ->Profissionais  ->Festividades  -> Outro
--	Memorias compartilhadas
--	Por Pessoa
--	Amorosas  ->Namoro  -> Noivado  -> casamento
--	Família
--	Religiosa
+## Funções:
+- Listar Lembranças
+-	Criar Lembrança 
+-	Editar Lembrança
+-	Deletar Lembrança
+-	Marcar Amigos
+-	Compartilhar Lembrança
+-	Lembretes
+- listar contato
+- excluir contato
+- editar contato
+- Notificação de ativaçaõ de conta de contato
+
+
+## Limguagem:
+- Java
