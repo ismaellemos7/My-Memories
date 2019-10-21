@@ -1,12 +1,14 @@
 package model;
 
-public class Lembrança {
+import java.util.Date;
+
+public class Lembranca {
 	private String titulo;
 	private String texto;
 	private Date data;
 	private String local;
 	
-	public Lembrança(String titulo, String texto, Date data, String local) {
+	public Lembranca(String titulo, String texto, Date data, String local) {
 		this.titulo = titulo;
 		this.texto = texto;
 		this.data = data;
