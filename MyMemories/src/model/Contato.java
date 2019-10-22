@@ -1,5 +1,4 @@
 package model;
-import model.Usuario;
 
 public class Contato {
 	private String nome;
