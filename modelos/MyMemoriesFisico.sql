@@ -1,18 +1,18 @@
 create database MyMemories;
 
 create table Usuario(
-	idUsuario integer not null,
+	idUsuario integer not null AUTO_INCREMENT UNIQUE,
     Nome varchar(45) not null,
-    Email varchar(60) not null,
+    Email varchar(60) not null UNIQUE,
     Senha varchar(20) not null,
-    Telefone integer not null,
+    Telefone integer not null UNIQUE,
     primary key(idUsuario)
 );
 
 create table Contato(
-	idContato integer not null,
+	idContato integer not null AUTO_INCREMENT UNIQUE,
     Nome varchar(45) not null,
-    Numero integer not null,
+    Numero integer not null UNIQUE,
     contato_usuario integer,
     id_usuario integer not null,
     foreign key(contato_usuario)
@@ -23,7 +23,7 @@ create table Contato(
 );
 
 create table Lembranca(
-	idLembranca integer not null,
+	idLembranca integer not null AUTO_INCREMENT UNIQUE,
     Titulo varchar(45) not null,
     Texto varchar(200),
     Data datetime not null,
@@ -35,7 +35,7 @@ create table Lembranca(
 );
 
 create table Tipo_Lembranca(
-	idTipo integer not null,
+	idTipo integer not null AUTO_INCREMENT UNIQUE,
     Nome varchar(45),
     codLembranca integer not null,
     foreign key(codLembranca)
@@ -44,7 +44,7 @@ create table Tipo_Lembranca(
 );
 
 create table ContatoEmLembranca(
-	Lembranca_idLembranca integer not null,
+	Lembranca_idLembranca integer not null AUTO_INCREMENT UNIQUE,
     Contato_idContato integer,
     CONSTRAINT foreign key(Lembranca_idLembranca)
     references Lembranca(idLembranca),
