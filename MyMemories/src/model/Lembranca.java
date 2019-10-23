@@ -8,6 +8,12 @@ public class Lembranca {
 	private Date data;
 	private String local;
 	
+	
+	
+	public Lembranca() {
+		
+	}
+
 	public Lembranca(String titulo, String texto, Date data, String local) {
 		this.titulo = titulo;
 		this.texto = texto;
