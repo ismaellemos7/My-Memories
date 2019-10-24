@@ -22,6 +22,12 @@ create table Contato(
     primary key(idContato)
 );
 
+create table Tipo_Lembranca(
+	idTipo integer not null AUTO_INCREMENT UNIQUE,
+    Nome varchar(45),
+    primary key(idTipo)
+);
+
 create table Lembranca(
 	idLembranca integer not null AUTO_INCREMENT UNIQUE,
     Titulo varchar(45) not null,
@@ -29,22 +35,16 @@ create table Lembranca(
     Data datetime not null,
     Local varchar(20),
     Dono_lembranca integer not null,
+    Tipo_de_lembranca integer not null,
     foreign key(Dono_lembranca)
     references Usuario(idUsuario),
+    foreign key(Tipo_de_lembranca)
+    references Tipo_Lembranca(idTipo),
     primary key(idLembranca)
 );
 
-create table Tipo_Lembranca(
-	idTipo integer not null AUTO_INCREMENT UNIQUE,
-    Nome varchar(45),
-    codLembranca integer not null,
-    foreign key(codLembranca)
-    references Lembranca(idLembranca),
-    primary key(idTipo)
-);
-
 create table ContatoEmLembranca(
-	Lembranca_idLembranca integer not null AUTO_INCREMENT UNIQUE,
+	Lembranca_idLembranca integer not null UNIQUE,
     Contato_idContato integer,
     CONSTRAINT foreign key(Lembranca_idLembranca)
     references Lembranca(idLembranca),
@@ -76,14 +76,35 @@ VALUES(1,'Romulo',4001-8921,NULL,2),
       (9,'Newton',4009-8921,9,2),
       (10,'Raquel',4000-8921,10,2);
       
+INSERT INTO tipo_lembranca()
+VALUES(1,'Familiar'),
+	  (2,'Data Comemorativa'),
+      (3,'Evento'),
+      (4,'Compartilhada'),
+      (5,'Pessoal'),
+      (6,'Amorosa'),
+      (7,'Religiosa');
+      
 INSERT INTO Lembranca()
-VALUES(1,'wtads 2018','muito legal','2018-11-05','IFRN - miniauditório',6),
-	  (2,'Palestra','','2019-09-08','IFRN - miniauditório',5),
-      (3,'Hacktoberfest','','2018-07-05','',3),
-      (4,'Hackaton','','2018-07-14','',4),
-      (5,'Minicurso','gostei da experiencia','2019-04-14','IFRN - lab06',8),
-      (6,'Minicurso django','','2018-08-19','IFRN - lab07',9),
-      (7,'Aniversario Fulano','','2018-10-21','',10),
-      (8,'Termino de Namoro','muito legal','2017-12-31','whatsapp',2),
-      (9,'Entrega de Trabalho','Banco de dados','2019-10-29','IFRN - lab 04',5),
-      (10,'Casamento','','2019-12-20','Arena da Dunas',7);
+VALUES(1,'wtads 2018','muito legal','2018-11-05','IFRN - miniauditório',6,3),
+	  (2,'Palestra','','2019-09-08','IFRN - miniauditório',5,3),
+      (3,'Hacktoberfest','','2018-07-05','',3,3),
+      (4,'Hackaton','','2018-07-14','',4,3),
+      (5,'Minicurso','gostei da experiencia','2019-04-14','IFRN - lab06',8,3),
+      (6,'Minicurso django','','2018-08-19','IFRN - lab07',9,3),
+      (7,'Aniversario Fulano','','2018-10-21','',10,2),
+      (8,'Termino de Namoro','muito legal','2017-12-31','whatsapp',2,6),
+      (9,'Entrega de Trabalho','Banco de dados','2019-10-29','IFRN - lab 04',5,3),
+      (10,'Casamento','','2019-12-20','Arena da Dunas',7,6);
+      
+INSERT INTO contatoemlembranca()
+VALUES(1,2),
+	  (2,2),
+      (3,2),
+      (4,2),
+      (5,2),
+      (6,2),
+      (7,2),
+      (8,2),
+      (9,2),
+      (10,2);
