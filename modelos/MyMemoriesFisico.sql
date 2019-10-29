@@ -65,18 +65,18 @@ VALUES(1,'João','joao@email.com','123abc',4002-8922),
       (10,'Raquel','Raquel@email.com','123abc',4902-8922);
       
 INSERT INTO Contato()
-VALUES(1,'Romulo',4001-8921,NULL,2),
+VALUES(1,'Romulo',4001-8921,NULL,9),
 	  (2,'Mozart',4002-8921,NULL,2),
-      (3,'Lucas',4003-8921,NULL,2),
-      (4,'Mateus',4004-8921,NULL,2),
+      (3,'Lucas',4003-8921,NULL,6),
+      (4,'Mateus',4004-8921,NULL,10),
       (5,'Breno',4005-8921,NULL,2),
-      (6,'Rafael',4006-8921,5,2),
-      (7,'Ismael',4007-8921,6,2),
-      (8,'Simei',4008-8921,4,2),
-      (9,'Newton',4009-8921,9,2),
-      (10,'Raquel',4000-8921,10,2);
+      (6,'Rafael',4006-8921,5,3),
+      (7,'Ismael',4007-8921,6,5),
+      (8,'Simei',4008-8921,4,6),
+      (9,'Newton',4009-8921,9,3),
+      (10,'Raquel',4000-8921,10,8);
       
-INSERT INTO tipo_lembranca()
+INSERT INTO tipo_lembranca() /* Os tipos de lembrança são limitados em 7 */
 VALUES(1,'Familiar'),
 	  (2,'Data Comemorativa'),
       (3,'Evento'),
@@ -87,9 +87,9 @@ VALUES(1,'Familiar'),
       
 INSERT INTO Lembranca()
 VALUES(1,'wtads 2018','muito legal','2018-11-05','IFRN - miniauditório',6,3),
-	  (2,'Palestra','','2019-09-08','IFRN - miniauditório',5,3),
-      (3,'Hacktoberfest','','2018-07-05','',3,3),
-      (4,'Hackaton','','2018-07-14','',4,3),
+	  (2,'Palestra','','2019-09-08','IFRN - miniauditório',6,3),
+      (3,'Hacktoberfest','','2018-07-05','',6,3),
+      (4,'Hackaton','','2018-07-14','',8,3),
       (5,'Minicurso','gostei da experiencia','2019-04-14','IFRN - lab06',8,3),
       (6,'Minicurso django','','2018-08-19','IFRN - lab07',9,3),
       (7,'Aniversario Fulano','','2018-10-21','',10,2),
@@ -98,13 +98,13 @@ VALUES(1,'wtads 2018','muito legal','2018-11-05','IFRN - miniauditório',6,3),
       (10,'Casamento','','2019-12-20','Arena da Dunas',7,6);
       
 INSERT INTO contatoemlembranca()
-VALUES(1,2),
-	  (2,2),
-      (3,2),
-      (4,2),
-      (5,2),
-      (6,2),
-      (7,2),
-      (8,2),
-      (9,2),
-      (10,2);
+VALUES(1,8),
+	  (2,6),
+      (3,3),
+      (4,10),
+      (5,10),
+      (6,1),
+      (7,4),
+      (8,NULL),
+      (9,7),
+      (10,NULL);
