@@ -14,17 +14,21 @@ A pessoas estão cada vez mais preocupadas com a segurança dos seus dados na in
 -	Lembrança
 
 ## Funções:
-- Listar Lembranças
--	Criar Lembrança 
--	Editar Lembrança
--	Deletar Lembrança
--	Marcar Amigos
--	Compartilhar Lembrança
--	Lembretes
-- listar contato
-- excluir contato
-- editar contato
-- Notificação de ativação de conta de contato
+- Listar Lembranças (por ano, por mês, por dia, por tipo);
+-	Criar Lembrança;
+-	Editar Lembrança;
+-	Deletar Lembrança;
+-	Marcar Amigos;
+-	Compartilhar Lembrança;
+-	Lembretes;
+- listar contato;
+- Adicionar Contato;
+- Editar Contato;
+- Excluir Contato;
+- Adicionar Usuário;
+- Editar Usuário;
+- Excluir Usuário;
+- Login.
 
 
 ## Linguagem:
