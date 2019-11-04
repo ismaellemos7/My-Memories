@@ -33,6 +33,19 @@ A pessoas estão cada vez mais preocupadas com a segurança dos seus dados na in
 - Excluir Usuário;
 - Login.
 
+## Consultas:
+
+- consultar lembrança por tipo, ano, mes, dia; 4
+- consultar lembrança por data mais recente;
+- consultar lembrança por data mais antiga;
+- contatos relacionados a lembrança;
+- contatos de um usuario;
+- contato de um usuário que é usuario;
+- contatos por ordem alfabética;
+- consultar contato por ordem numerica (id);
+- consultar usuários por ordem alfabética;
+- consultar usuário por email
+
 ## Descrição:
 #### Listar Lembranças
 Lista lembranças por dia, mês e ano.
