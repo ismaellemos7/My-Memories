@@ -10,7 +10,6 @@ A pessoas estão cada vez mais preocupadas com a segurança dos seus dados na in
 
 ## Entidades:
 -	Usuário
--	Amigo
 - Contato
 - ContatoLembraça
 -	Lembrança
