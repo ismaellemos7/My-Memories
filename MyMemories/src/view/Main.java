@@ -11,8 +11,18 @@ import model.*;
 public class Main {
 
 	public static void main(String[] args) {
-		boolean c = true;
+		Scanner sc = new Scanner(System.in);
+		boolean c = true, login = false;
 		int n;
+		while(login == false) {
+			System.out.print("Nome usuário: ");
+			String username = sc.nextLine();
+			System.out.print("Senha: ");
+			String password = sc.nextLine();
+			
+			
+		}
+		
 
 		while(c) {
 			System.out.println("1) Criar nova Lembrança");
@@ -21,7 +31,6 @@ public class Main {
 			System.out.println("4) Editar Lembrança");
 			System.out.println("5) Sair");
 
-			Scanner sc = new Scanner(System.in);
 			System.out.print("\nDigite uma opção: ");
 			n = sc.nextInt();
 			System.out.print("\n\n");
@@ -41,159 +50,79 @@ public class Main {
 				System.out.print("\nDigite uma opção: ");
 				n = sc.nextInt();
 				System.out.print("\n\n");
+				
+				System.out.print("Titulo: ");
+				sc = new Scanner(System.in);
+				String titulo = sc.nextLine();
+				System.out.print("Texto: ");
+				sc = new Scanner(System.in);
+				String texto = sc.nextLine();
+				Date da;
+				try {
+					System.out.println("Data");
+					String date = sc.next();
+					DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+					Date d = data.parse(date);
+					da=data.parse(date);
+				} catch (Exception ex){
+					ex.printStackTrace();
+				}
+				System.out.println("Local: ");
+				String local = sc.nextLine();
+				
 				switch(n) {
 				case 1:
 					Data_Comemorativa data_comemorativa = new Data_Comemorativa();
-					System.out.print("Titulo: ");
-					sc = new Scanner(System.in);
-					String Titulo = sc.nextLine();
-					System.out.print("Texto: ");
-					sc = new Scanner(System.in);
-					String Texto = sc.nextLine();
-					try {
-						System.out.println("Data");
-						String date = sc.next();
-						DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-						Date d = data.parse(date);
-						System.out.println(d);
-						Date da=data.parse(date);
-					} catch (Exception ex){
-						ex.printStackTrace();
-					}
-					System.out.println("Local: ");
-					String local = sc.nextLine();
-					System.out.println("Data Comemorativa Criada");
+					data_comemorativa.setTitulo(titulo);
+					data_comemorativa.setTexto(texto);
+					data_comemorativa.setData(da);
+					data_comemorativa.setLocal(local);
 					break;
 				case 2:
 					Evento evento = new Evento();
-					System.out.print("Titulo: ");
-					sc = new Scanner(System.in);
-					Titulo = sc.nextLine();
-					System.out.print("Texto: ");
-					sc = new Scanner(System.in);
-					Texto = sc.nextLine();
-					try {
-						System.out.println("Data");
-						String date = sc.next();
-						DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-						Date d = data.parse(date);
-						System.out.println(d);
-						Date da=data.parse(date);
-					} catch (Exception ex){
-						ex.printStackTrace();
-					}
-					System.out.println("Local: ");
-					local = sc.nextLine();
+					evento.setTitulo(titulo);
+					evento.setTexto(texto);
+					evento.setData(da);
+					evento.setLocal(local);
 					System.out.println("Evento criado");
 					break;
 				case 3:
 					Compartilhada compartilhada = new Compartilhada();
-					System.out.print("Titulo: ");
-					sc = new Scanner(System.in);
-					Titulo = sc.nextLine();
-					System.out.print("Texto: ");
-					sc = new Scanner(System.in);
-					Texto = sc.nextLine();
-					try {
-						System.out.println("Data");
-						String date = sc.next();
-						DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-						Date d = data.parse(date);
-						System.out.println(d);
-						Date da=data.parse(date);
-					} catch (Exception ex){
-						ex.printStackTrace();
-					}
-					System.out.println("Local: ");
-					local = sc.nextLine();
+					compartilhada.setTitulo(titulo);
+					compartilhada.setTexto(texto);
+					compartilhada.setData(da);
+					compartilhada.setLocal(local);
 					System.out.println("Lembrança compartilhada adicionada");
 					break;
 				case 4:
 					Amorosa amorosa = new Amorosa();
-					System.out.print("Titulo: ");
-					sc = new Scanner(System.in);
-					Titulo = sc.nextLine();
-					System.out.print("Texto: ");
-					sc = new Scanner(System.in);
-					Texto = sc.nextLine();
-					try {
-						System.out.println("Data");
-						String date = sc.next();
-						DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-						Date d = data.parse(date);
-						System.out.println(d);
-						Date da=data.parse(date);
-					} catch (Exception ex){
-						ex.printStackTrace();
-					}
-					System.out.println("Local: ");
-					local = sc.nextLine();
-					System.out.println("Lembraça Amorosa criada");
+					amorosa.setTitulo(titulo);
+					amorosa.setTexto(texto);
+					amorosa.setData(da);
+					amorosa.setLocal(local);
 					break;
 				case 5:
 					Religiosa religiosa = new Religiosa();
-					System.out.print("Titulo: ");
-					sc = new Scanner(System.in);
-					Titulo = sc.nextLine();
-					System.out.print("Texto: ");
-					sc = new Scanner(System.in);
-					Texto = sc.nextLine();
-					try {
-						System.out.println("Data");
-						String date = sc.next();
-						DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-						Date d = data.parse(date);
-						System.out.println(d);
-						Date da=data.parse(date);
-					} catch (Exception ex){
-						ex.printStackTrace();
-					}
-					System.out.println("Local: ");
-					local = sc.nextLine();
+					religiosa.setTitulo(titulo);
+					religiosa.setTexto(texto);
+					religiosa.setData(da);
+					religiosa.setLocal(local);
 					System.out.println("Religiosa criada");
 					break;
 				case 6:
 					Familiar familiar = new Familiar();
-					System.out.print("Titulo: ");
-					sc = new Scanner(System.in);
-					Titulo = sc.nextLine();
-					System.out.print("Texto: ");
-					sc = new Scanner(System.in);
-					Texto = sc.nextLine();
-					try {
-						System.out.println("Data");
-						String date = sc.next();
-						DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-						Date d = data.parse(date);
-						System.out.println(d);
-						Date da=data.parse(date);
-					} catch (Exception ex){
-						ex.printStackTrace();
-					}
-					System.out.println("Local: ");
-					local = sc.nextLine();
+					familiar.setTitulo(titulo);
+					familiar.setTexto(texto);
+					familiar.setData(da);
+					familiar.setLocal(local);
 					System.out.println("Familiar criada");
 					break;
 				case 7:
 					De_Alguem de_alguem = new De_Alguem();
-					System.out.print("Titulo: ");
-					sc = new Scanner(System.in);
-					Titulo = sc.nextLine();
-					System.out.print("Texto: ");
-					sc = new Scanner(System.in);
-					Texto = sc.nextLine();
-					try {
-						System.out.println("Data");
-						String date = sc.next();
-						DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-						Date d = data.parse(date);
-						System.out.println(d);
-						Date da=data.parse(date);
-					} catch (Exception ex){
-						ex.printStackTrace();
-					}
-					System.out.println("Local: ");
-					local = sc.nextLine();
+					de_alguem.setTitulo(titulo);
+					de_alguem.setTexto(texto);
+					de_alguem.setData(da);
+					de_alguem.setLocal(local);
 					System.out.println("De alguém");
 					break;
 				default:
@@ -348,7 +277,7 @@ public class Main {
 							DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 							Date d = data.parse(date);
 							System.out.println(d);
-							Date da=data.parse(date);
+							da=data.parse(date);
 						} catch (Exception ex){
 							ex.printStackTrace();
 						}
@@ -370,7 +299,7 @@ public class Main {
 							DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 							Date d = data.parse(date);
 							System.out.println(d);
-							Date da=data.parse(date);
+							da=data.parse(date);
 						} catch (Exception ex){
 							ex.printStackTrace();
 						}
@@ -392,7 +321,7 @@ public class Main {
 							DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 							Date d = data.parse(date);
 							System.out.println(d);
-							Date da=data.parse(date);
+							da=data.parse(date);
 						} catch (Exception ex){
 							ex.printStackTrace();
 						}
@@ -414,7 +343,7 @@ public class Main {
 							DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 							Date d = data.parse(date);
 							System.out.println(d);
-							Date da=data.parse(date);
+							da=data.parse(date);
 						} catch (Exception ex){
 							ex.printStackTrace();
 						}
@@ -436,7 +365,7 @@ public class Main {
 							DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 							Date d = data.parse(date);
 							System.out.println(d);
-							Date da=data.parse(date);
+							da=data.parse(date);
 						} catch (Exception ex){
 							ex.printStackTrace();
 						}
@@ -458,7 +387,7 @@ public class Main {
 							DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 							Date d = data.parse(date);
 							System.out.println(d);
-							Date da=data.parse(date);
+							da=data.parse(date);
 						} catch (Exception ex){
 							ex.printStackTrace();
 						}
@@ -480,7 +409,7 @@ public class Main {
 							DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 							Date d = data.parse(date);
 							System.out.println(d);
-							Date da=data.parse(date);
+							da=data.parse(date);
 						} catch (Exception ex){
 							ex.printStackTrace();
 						}
