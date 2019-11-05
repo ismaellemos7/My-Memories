@@ -1,5 +1,7 @@
 create database MyMemories;
 
+use MyMemories;
+
 create table Usuario(
 	idUsuario integer not null AUTO_INCREMENT UNIQUE,
     Nome varchar(45) not null,
@@ -32,7 +34,7 @@ create table Lembranca(
 	idLembranca integer not null AUTO_INCREMENT UNIQUE,
     Titulo varchar(45) not null,
     Texto varchar(200),
-    Data datetime not null,
+    Data date not null,
     Local varchar(20),
     Dono_lembranca integer not null,
     Tipo_de_lembranca integer not null,
@@ -53,28 +55,28 @@ create table ContatoEmLembranca(
 );
 
 INSERT INTO Usuario()
-VALUES(1,'João','joao@email.com','123abc',4002-8922),
-	  (2,'Jose','Jose@email.com','123abc',4102-8922),
-	  (3,'Joaquim','Joaquim@email.com','123abc',4202-8922),
-      (4,'Simei','Simei@email.com','123abc',4302-8922),
-      (5,'Rafael','Rafael@email.com','123abc',4402-8922),
-      (6,'Ismael','Ismael@email.com','123abc',4502-8922),
-      (7,'Eymael','Eymael@email.com','123abc',4602-8922),
-      (8,'Tiago','Tiago@email.com','123abc',4702-8922),
-      (9,'Newton','Newton@email.com','123abc',4802-8922),
-      (10,'Raquel','Raquel@email.com','123abc',4902-8922);
+VALUES(1,'João','joao@email.com','123abc',40028922),
+	  (2,'Jose','Jose@email.com','123abc',41028922),
+	  (3,'Joaquim','Joaquim@email.com','123abc',42028922),
+      (4,'Simei','Simei@email.com','123abc',43028922),
+      (5,'Rafael','Rafael@email.com','123abc',44028922),
+      (6,'Ismael','Ismael@email.com','123abc',45028922),
+      (7,'Eymael','Eymael@email.com','123abc',46028922),
+      (8,'Tiago','Tiago@email.com','123abc',47028922),
+      (9,'Newton','Newton@email.com','123abc',48028922),
+      (10,'Raquel','Raquel@email.com','123abc',49028922);
       
 INSERT INTO Contato()
-VALUES(1,'Romulo',4001-8921,NULL,9),
-	  (2,'Mozart',4002-8921,NULL,2),
-      (3,'Lucas',4003-8921,NULL,6),
-      (4,'Mateus',4004-8921,NULL,10),
-      (5,'Breno',4005-8921,NULL,2),
-      (6,'Rafael',4006-8921,5,3),
-      (7,'Ismael',4007-8921,6,5),
-      (8,'Simei',4008-8921,4,6),
-      (9,'Newton',4009-8921,9,3),
-      (10,'Raquel',4000-8921,10,8);
+VALUES(1,'Romulo',40018921,NULL,9),
+	  (2,'Mozart',40028921,NULL,2),
+      (3,'Lucas',40038921,NULL,6),
+      (4,'Mateus',40048921,NULL,10),
+      (5,'Breno',40058921,NULL,2),
+      (6,'Rafael',40068921,5,3),
+      (7,'Ismael',40078921,6,5),
+      (8,'Simei',4008-921,4,6),
+      (9,'Newton',40098921,9,3),
+      (10,'Raquel',40008921,10,8);
       
 INSERT INTO tipo_lembranca() /* Os tipos de lembrança são limitados em 7 */
 VALUES(1,'Familiar'),
@@ -110,20 +112,17 @@ VALUES(1,8),
       (10,NULL);
       
       
-SELECT * FROM Lembranca  WHERE Tipo_de_lembranca=1;
+SELECT * FROM Lembranca  WHERE Tipo_de_lembranca=2;
 SELECT * FROM Lembranca WHERE YEAR(Data) = '2019';
 SELECT * FROM Lembranca WHERE MONTH(Data) = '03';
 SELECT * FROM Lembranca WHERE DAY(data) = '04';
 SELECT * FROM Lembranca;
 SELECT * FROM Lembranca WHERE Dono_lembranca=1;
-SELECT * FROM Lembranca order by Dono_lembranca;
+SELECT * FROM Lembranca order by Data;
 SELECT Contato_idContato FROM contatoemlembranca WHERE Lembranca_idLembranca=1;
 SELECT * FROM Contato WHERE id_usuario=1;
-SELECT * FROM Contato WHERE id_usuario=1 AND contato_usuario <> null;
+SELECT * FROM Contato WHERE contato_usuario <> null;
 SELECT * FROM Contato order by Nome;
 SELECT * FROM Contato order by idContato;
 SELECT * FROM Usuario order by Nome;
 SELECT * FROM Usuario WHERE Email='joao@email.com';
-
-
-
