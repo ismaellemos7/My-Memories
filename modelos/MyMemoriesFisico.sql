@@ -44,7 +44,7 @@ create table Lembranca(
 );
 
 create table ContatoEmLembranca(
-	Lembranca_idLembranca integer not null UNIQUE,
+	Lembranca_idLembranca integer not null,
     Contato_idContato integer,
     CONSTRAINT foreign key(Lembranca_idLembranca)
     references Lembranca(idLembranca),
@@ -108,3 +108,22 @@ VALUES(1,8),
       (8,NULL),
       (9,7),
       (10,NULL);
+      
+      
+SELECT * FROM Lembranca  WHERE Tipo_de_lembranca=1;
+SELECT * FROM Lembranca WHERE YEAR(Data) = '2019';
+SELECT * FROM Lembranca WHERE MONTH(Data) = '03';
+SELECT * FROM Lembranca WHERE DAY(data) = '04';
+SELECT * FROM Lembranca;
+SELECT * FROM Lembranca WHERE Dono_lembranca=1;
+SELECT * FROM Lembranca order by Dono_lembranca;
+SELECT Contato_idContato FROM contatoemlembranca WHERE Lembranca_idLembranca=1;
+SELECT * FROM Contato WHERE id_usuario=1;
+SELECT * FROM Contato WHERE id_usuario=1 AND contato_usuario <> null;
+SELECT * FROM Contato order by Nome;
+SELECT * FROM Contato order by idContato;
+SELECT * FROM Usuario order by Nome;
+SELECT * FROM Usuario WHERE Email='joao@email.com';
+
+
+
