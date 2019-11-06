@@ -4,7 +4,8 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private int id;
+	private int telefone;
+	private Integer id;
 	
 	
 	
@@ -12,15 +13,13 @@ public class Usuario {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public Usuario() {
 		
 	}
-
-	private int telefone;
 	
 	public Usuario(String nome, String email, String senha, int telefone) {
 		this.nome = nome;
@@ -61,8 +60,4 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 
-
-
-	
-	
 }

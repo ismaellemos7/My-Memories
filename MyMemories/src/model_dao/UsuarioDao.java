@@ -1,12 +1,11 @@
-package model;
-import java.awt.HeadlessException;
+package model_dao;
+
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
+import model.Usuario;
+import java.awt.HeadlessException;
 
-public class UsuarioDAO {
-
-
+public class UsuarioDao {
 	public boolean createUser(Usuario usuario) throws Throwable {
 		Conexao con = new Conexao();
 		Class.forName(con.getDriver());
@@ -53,9 +52,8 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 
-	public boolean editaUsuario(Usuario usuario) {
+	public boolean editarUsuario(Usuario usuario) {
 		try{
-
 			Conexao dados_con = new Conexao();
 			Class.forName(dados_con.getDriver());
 			Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha());
@@ -73,6 +71,7 @@ public class UsuarioDAO {
 		}
 	}
 
+	
 	public boolean deleteUser(Usuario usuario) throws ClassNotFoundException, SQLException {
 		Conexao con = new Conexao();
         Class.forName(con.getDriver());
@@ -111,6 +110,4 @@ public class UsuarioDAO {
         }
         return usuario;    
     }
-
-
 }

@@ -1,6 +1,5 @@
 package model;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 public class Data_Comemorativa extends Lembranca {
@@ -14,7 +13,4 @@ public class Data_Comemorativa extends Lembranca {
 		super(titulo, texto, data, local);
 		// TODO Auto-generated constructor stub
 	}
-
-	
-	
 }

@@ -2,8 +2,7 @@ package model;
 
 public class Tipo_Lembranca {
 	private String nome;
-	private int id;
-	private int codLembranca;
+	private Integer id;
 	
 	
 	public Tipo_Lembranca() {
@@ -11,11 +10,10 @@ public class Tipo_Lembranca {
 	}
 
 
-	public Tipo_Lembranca(String nome, int id, int codLembranca) {
+	public Tipo_Lembranca(String nome, Integer id, int codLembranca) {
 		super();
 		this.nome = nome;
 		this.id = id;
-		this.codLembranca = codLembranca;
 	}
 
 
@@ -34,18 +32,8 @@ public class Tipo_Lembranca {
 	}
 
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
-	}
-
-
-	public int getCodLembranca() {
-		return codLembranca;
-	}
-
-
-	public void setCodLembranca(int codLembranca) {
-		this.codLembranca = codLembranca;
 	}
 	
 }

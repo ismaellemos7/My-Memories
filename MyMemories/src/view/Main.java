@@ -1,7 +1,5 @@
 package view;
 
-
-
 import java.util.Date;
 import java.util.Scanner;
 import java.text.DateFormat;
@@ -11,6 +9,7 @@ import model.*;
 public class Main {
 
 	public static void main(String[] args) {
+		String teste1 = "ismael", teste2 = "12345";
 		Scanner sc = new Scanner(System.in);
 		boolean c = true, login = false;
 		int n;
@@ -19,10 +18,9 @@ public class Main {
 			String username = sc.nextLine();
 			System.out.print("Senha: ");
 			String password = sc.nextLine();
-			
-			
+			break;
 		}
-		
+
 
 		while(c) {
 			System.out.println("1) Criar nova Lembrança");
@@ -50,14 +48,14 @@ public class Main {
 				System.out.print("\nDigite uma opção: ");
 				n = sc.nextInt();
 				System.out.print("\n\n");
-				
+
 				System.out.print("Titulo: ");
 				sc = new Scanner(System.in);
 				String titulo = sc.nextLine();
 				System.out.print("Texto: ");
 				sc = new Scanner(System.in);
 				String texto = sc.nextLine();
-				Date da;
+				Date da = null;
 				try {
 					System.out.println("Data");
 					String date = sc.next();
@@ -68,8 +66,9 @@ public class Main {
 					ex.printStackTrace();
 				}
 				System.out.println("Local: ");
+				sc = new Scanner(System.in);
 				String local = sc.nextLine();
-				
+
 				switch(n) {
 				case 1:
 					Data_Comemorativa data_comemorativa = new Data_Comemorativa();
@@ -77,6 +76,11 @@ public class Main {
 					data_comemorativa.setTexto(texto);
 					data_comemorativa.setData(da);
 					data_comemorativa.setLocal(local);
+					String teste = "" + data_comemorativa.getClass();
+					System.out.println(teste);
+					if(teste == "class model.Data_Comemorativa") {
+						System.out.println("Deu certo");
+					}
 					break;
 				case 2:
 					Evento evento = new Evento();
@@ -282,7 +286,7 @@ public class Main {
 							ex.printStackTrace();
 						}
 						System.out.println("Local: ");
-						String local = sc.nextLine();
+						local = sc.nextLine();
 						System.out.println("Data Comemorativa Criada");
 						break;
 					case 2:
@@ -421,15 +425,15 @@ public class Main {
 						System.out.println("\nOpção invalida\n");
 					}
 					break;
-				case 5:
-					c = false;
-					break;
-				default:
-					System.out.println("\nOpção invalida\n");
 				}
+			case 5:
+				c = false;
+				break;
+			default:
+				System.out.println("\nOpção invalida\n");
 			}
-			System.out.println("Programa encerrado -_-");
 
 		}
+		System.out.println("Programa encerrado -_-");
 	}
 }
