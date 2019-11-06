@@ -12,13 +12,44 @@ public class Main {
 		String teste1 = "ismael", teste2 = "12345";
 		Scanner sc = new Scanner(System.in);
 		boolean c = true, login = false;
-		int n;
+		int n, n2;
 		while(login == false) {
-			System.out.print("Nome usuário: ");
-			String username = sc.nextLine();
-			System.out.print("Senha: ");
-			String password = sc.nextLine();
-			break;
+			System.out.println("1) Realizar Login");
+			System.out.println("2) Cadastrar Usuario");
+			System.out.println("3) Encerrar Programa");
+			System.out.print("\nDigite uma opção: ");
+			n2 = sc.nextInt();
+			System.out.print("\n\n");
+			switch(n2) {
+			case 1:
+				System.out.print("Nome usuário: ");
+				sc = new Scanner(System.in);
+				String username = sc.nextLine();
+				System.out.print("Senha: ");
+				sc = new Scanner(System.in);
+				String password = sc.nextLine();
+				login = true;
+				break;
+			case 2:
+				System.out.print("Inserir nome ");
+				sc = new Scanner(System.in);
+				String nome = sc.nextLine();
+				System.out.print("Inserir telefone ");
+				sc = new Scanner(System.in);
+				String telefone = sc.nextLine();
+				System.out.print("Inserir email ");
+				sc = new Scanner(System.in);
+				String email = sc.nextLine();
+				System.out.print("Inserir senha ");
+				sc = new Scanner(System.in);
+				String senha = sc.nextLine();
+				break;
+			case 3:
+				c = false;
+				login = true;
+			default:
+				System.out.println("Opção invalida");
+			}
 		}
 
 
@@ -68,6 +99,7 @@ public class Main {
 				System.out.println("Local: ");
 				sc = new Scanner(System.in);
 				String local = sc.nextLine();
+				Tipo_Lembranca tipo = new Tipo_Lembranca();
 
 				switch(n) {
 				case 1:
@@ -76,11 +108,8 @@ public class Main {
 					data_comemorativa.setTexto(texto);
 					data_comemorativa.setData(da);
 					data_comemorativa.setLocal(local);
-					String teste = "" + data_comemorativa.getClass();
-					System.out.println(teste);
-					if(teste == "class model.Data_Comemorativa") {
-						System.out.println("Deu certo");
-					}
+					tipo.setId(2);
+					tipo.setNome("Data_Comemorativa");
 					break;
 				case 2:
 					Evento evento = new Evento();
@@ -88,7 +117,8 @@ public class Main {
 					evento.setTexto(texto);
 					evento.setData(da);
 					evento.setLocal(local);
-					System.out.println("Evento criado");
+					tipo.setId(3);
+					tipo.setNome("Evento");
 					break;
 				case 3:
 					Compartilhada compartilhada = new Compartilhada();
@@ -96,7 +126,8 @@ public class Main {
 					compartilhada.setTexto(texto);
 					compartilhada.setData(da);
 					compartilhada.setLocal(local);
-					System.out.println("Lembrança compartilhada adicionada");
+					tipo.setId(4);
+					tipo.setNome("Compartilhada");
 					break;
 				case 4:
 					Amorosa amorosa = new Amorosa();
@@ -104,6 +135,8 @@ public class Main {
 					amorosa.setTexto(texto);
 					amorosa.setData(da);
 					amorosa.setLocal(local);
+					tipo.setId(6);
+					tipo.setNome("Amorosa");
 					break;
 				case 5:
 					Religiosa religiosa = new Religiosa();
@@ -111,7 +144,8 @@ public class Main {
 					religiosa.setTexto(texto);
 					religiosa.setData(da);
 					religiosa.setLocal(local);
-					System.out.println("Religiosa criada");
+					tipo.setId(7);
+					tipo.setNome("Religiosa");
 					break;
 				case 6:
 					Familiar familiar = new Familiar();
@@ -119,7 +153,8 @@ public class Main {
 					familiar.setTexto(texto);
 					familiar.setData(da);
 					familiar.setLocal(local);
-					System.out.println("Familiar criada");
+					tipo.setId(1);
+					tipo.setNome("Familiar");
 					break;
 				case 7:
 					De_Alguem de_alguem = new De_Alguem();
@@ -127,7 +162,8 @@ public class Main {
 					de_alguem.setTexto(texto);
 					de_alguem.setData(da);
 					de_alguem.setLocal(local);
-					System.out.println("De alguém");
+					tipo.setId(5);
+					tipo.setNome("Pessoa");
 					break;
 				default:
 					System.out.println("\nOpção invalida\n");
@@ -436,4 +472,5 @@ public class Main {
 		}
 		System.out.println("Programa encerrado -_-");
 	}
+}
 }
