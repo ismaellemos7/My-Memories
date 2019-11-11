@@ -111,18 +111,23 @@ VALUES(1,8),
       (9,7),
       (10,NULL);
       
-      
 SELECT * FROM Lembranca  WHERE Tipo_de_lembranca=2;
 SELECT * FROM Lembranca WHERE YEAR(Data) = '2019';
 SELECT * FROM Lembranca WHERE MONTH(Data) = '03';
 SELECT * FROM Lembranca WHERE DAY(data) = '04';
 SELECT * FROM Lembranca;
+SELECT * FROM Lembranca WHERE texto != '';
+SELECT * FROM Lembranca WHERE local != '';
+SELECT * FROM Lembranca WHERE texto != '' AND local != '';
 SELECT * FROM Lembranca WHERE Dono_lembranca=1;
 SELECT * FROM Lembranca order by Data;
 SELECT Contato_idContato FROM contatoemlembranca WHERE Lembranca_idLembranca=1;
 SELECT * FROM Contato WHERE id_usuario=1;
-SELECT * FROM Contato WHERE contato_usuario <> null;
+SELECT * FROM Contato WHERE contato_usuario;
 SELECT * FROM Contato order by Nome;
 SELECT * FROM Contato order by idContato;
 SELECT * FROM Usuario order by Nome;
-SELECT * FROM Usuario WHERE Email='joao@email.com';
+SELECT c.Nome, cl.Lembranca_idLembranca FROM Contato c JOIN contatoemlembranca cl ON c.idcontato = cl.contato_idcontato WHERE c.nome = 'Raquel';
+SELECT u.nome, l.titulo FROM Usuario u JOIN Lembranca l ON u.idusuario = l.dono_lembranca;
+SELECT l.titulo, tl.nome FROM lembranca l JOIN tipo_lembranca tl ON l.tipo_de_lembranca = tl.idtipo;
+SELECT u.nome, c.nome FROM Usuario u JOIN Contato c ON u.idusuario = c.id_usuario WHERE u.nome = 'jose';
