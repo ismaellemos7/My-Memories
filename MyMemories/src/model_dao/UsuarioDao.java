@@ -85,7 +85,7 @@ public class UsuarioDao {
 	}
 	
 	
-	public Usuario autenticarUsuario(String email, String senha) {
+	public Usuario autenticarUsuario(int Telefone, String senha) {
         Usuario usuario = new Usuario();
         try {
             Conexao dados_con = new Conexao();
@@ -94,13 +94,14 @@ public class UsuarioDao {
                 Statement stmt = conn.createStatement();
                 ResultSet rs;
                 
-                rs = stmt.executeQuery("select * from Usuario where email='"+email+"' and senha='"+senha+"'");
+                rs = stmt.executeQuery("select * from Usuario where Telefone='"+Telefone+"' and senha='"+senha+"'");
                 
                 if(rs.next()){
                     usuario.setId(rs.getInt("id"));
                     usuario.setNome(rs.getString("nome"));
                     usuario.setEmail(rs.getString("email"));
                     usuario.setSenha(rs.getString("senha"));
+                    usuario.setTelefone(rs.getInt("Telefone"));
                     return usuario;
                 }
             }

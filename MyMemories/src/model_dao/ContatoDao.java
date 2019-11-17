@@ -22,7 +22,7 @@ public class ContatoDao {
 		Statement stmt = conn.createStatement();
 		ResultSet rs;
 
-		rs = stmt.executeQuery("SELECT * FROM Contato WHERE Numero='" + contato.getTelefone() + "'");
+		rs = stmt.executeQuery("SELECT id FROM Usuario WHERE Telefone='" + contato.getTelefone() + "'");
 		if(rs.next()){
 			user.setId(rs.getInt("id"));
         }
@@ -76,9 +76,9 @@ public class ContatoDao {
 		Conexao con = new Conexao();
         Class.forName(con.getDriver());
         Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
-		String query = " delete from Contato where id= ?";
+		String query = " delete from Contato where telefone= ?";
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
-		preparedStmt.setInt (1, contato.getId());
+		preparedStmt.setInt (1, contato.getTelefone());
 		preparedStmt.executeUpdate();
 		return true;
 	}

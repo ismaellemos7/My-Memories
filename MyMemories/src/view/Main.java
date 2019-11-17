@@ -5,13 +5,18 @@ import java.util.Scanner;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import model.*;
+import model_dao.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Throwable {
 		String teste1 = "ismael", teste2 = "12345";
+		UsuarioDao usuarioDao = new UsuarioDao();
+		LembrancaDao lembrancaDao = new LembrancaDao();
+		ContatoDao contatoDao = new ContatoDao();
 		Scanner sc = new Scanner(System.in);
 		boolean c = true, login = false;
+		Usuario usuario = null;
 		int n, n2;
 		while(login == false) {
 			System.out.println("1) Realizar Login");
@@ -22,27 +27,40 @@ public class Main {
 			System.out.print("\n\n");
 			switch(n2) {
 			case 1:
-				System.out.print("Nome usuário: ");
+				System.out.print("Número de telefone: ");
 				sc = new Scanner(System.in);
-				String username = sc.nextLine();
+				int telefone = sc.nextInt();
 				System.out.print("Senha: ");
 				sc = new Scanner(System.in);
 				String password = sc.nextLine();
-				login = true;
+				usuario = usuarioDao.autenticarUsuario(telefone, password);
+				if(usuario == null) {
+					System.out.println("Você inserio um número ou senha invalido");
+				}
+				else {
+					login = true;
+				}
 				break;
 			case 2:
+				Usuario user = new Usuario();
 				System.out.print("Inserir nome ");
 				sc = new Scanner(System.in);
 				String nome = sc.nextLine();
+				user.setNome(nome);
 				System.out.print("Inserir telefone ");
 				sc = new Scanner(System.in);
-				String telefone = sc.nextLine();
+				telefone = sc.nextInt();
+				user.setTelefone(telefone);
 				System.out.print("Inserir email ");
 				sc = new Scanner(System.in);
 				String email = sc.nextLine();
+				user.setEmail(email);
 				System.out.print("Inserir senha ");
 				sc = new Scanner(System.in);
 				String senha = sc.nextLine();
+				user.setSenha(senha);
+				if(usuarioDao.createUser(user)==true) System.out.println("Novo usuario criado com sucesso");
+				else System.out.println("Deu ruim!");
 				break;
 			case 3:
 				c = false;
@@ -58,7 +76,13 @@ public class Main {
 			System.out.println("2) Listar Lembranças");
 			System.out.println("3) Deletar Lembrança");
 			System.out.println("4) Editar Lembrança");
-			System.out.println("5) Sair");
+			System.out.println("5) Criar novo contato");
+			System.out.println("6) Editar contato");
+			System.out.println("7) Deletar contato");
+			System.out.println("8) Listar contatos");
+			System.out.println("9) Editar dados da conta");
+			System.out.println("10) Deletar sua conta");
+			System.out.println("11) Sair");
 
 			System.out.print("\nDigite uma opção: ");
 			n = sc.nextInt();
@@ -110,6 +134,7 @@ public class Main {
 					data_comemorativa.setLocal(local);
 					tipo.setId(2);
 					tipo.setNome("Data_Comemorativa");
+					lembrancaDao.criarLembranca(usuario, data_comemorativa, tipo);
 					break;
 				case 2:
 					Evento evento = new Evento();
@@ -119,6 +144,7 @@ public class Main {
 					evento.setLocal(local);
 					tipo.setId(3);
 					tipo.setNome("Evento");
+					lembrancaDao.criarLembranca(usuario, evento, tipo);
 					break;
 				case 3:
 					Compartilhada compartilhada = new Compartilhada();
@@ -128,6 +154,7 @@ public class Main {
 					compartilhada.setLocal(local);
 					tipo.setId(4);
 					tipo.setNome("Compartilhada");
+					lembrancaDao.criarLembranca(usuario, compartilhada, tipo);
 					break;
 				case 4:
 					Amorosa amorosa = new Amorosa();
@@ -137,6 +164,7 @@ public class Main {
 					amorosa.setLocal(local);
 					tipo.setId(6);
 					tipo.setNome("Amorosa");
+					lembrancaDao.criarLembranca(usuario, amorosa, tipo);
 					break;
 				case 5:
 					Religiosa religiosa = new Religiosa();
@@ -146,6 +174,7 @@ public class Main {
 					religiosa.setLocal(local);
 					tipo.setId(7);
 					tipo.setNome("Religiosa");
+					lembrancaDao.criarLembranca(usuario, religiosa, tipo);
 					break;
 				case 6:
 					Familiar familiar = new Familiar();
@@ -155,6 +184,7 @@ public class Main {
 					familiar.setLocal(local);
 					tipo.setId(1);
 					tipo.setNome("Familiar");
+					lembrancaDao.criarLembranca(usuario, familiar, tipo);
 					break;
 				case 7:
 					De_Alguem de_alguem = new De_Alguem();
@@ -163,7 +193,8 @@ public class Main {
 					de_alguem.setData(da);
 					de_alguem.setLocal(local);
 					tipo.setId(5);
-					tipo.setNome("Pessoa");
+					tipo.setNome("Pessoal");
+					lembrancaDao.criarLembranca(usuario, de_alguem, tipo);
 					break;
 				default:
 					System.out.println("\nOpção invalida\n");
@@ -463,6 +494,68 @@ public class Main {
 					break;
 				}
 			case 5:
+				Contato contato = new Contato();
+				System.out.print("Digite o nome do contato que você quer inserir");
+				sc = new Scanner(System.in);
+				String nome = sc.nextLine();
+				contato.setNome(nome);
+				System.out.print("Digite o telefone");
+				sc = new Scanner(System.in);
+				int telefone = sc.nextInt();
+				contato.setTelefone(telefone);
+				contatoDao.criarContato(contato, usuario);
+				
+			case 6:
+				contato = new Contato();
+				System.out.print("Digite o novo nome do contato");
+				sc = new Scanner(System.in);
+				nome = sc.nextLine();
+				contato.setNome(nome);
+				System.out.print("Digite o novo telefone");
+				sc = new Scanner(System.in);
+				telefone = sc.nextInt();
+				contato.setTelefone(telefone);
+				contatoDao.editarContoto(contato);
+			case 7:	
+				contato = new Contato();
+				System.out.print("Digite o novo telefone");
+				sc = new Scanner(System.in);
+				telefone = sc.nextInt();
+				contato.setTelefone(telefone);
+				contatoDao.deletarContato(contato);
+				
+			case 8:
+				System.out.println("Listando contatos");
+				contatoDao.listarContatos(usuario);
+				
+			case 9:
+				System.out.println("Edite os dados da sua conta");
+				Usuario user = new Usuario();
+				System.out.print("Inserir nome ");
+				sc = new Scanner(System.in);
+				nome = sc.nextLine();
+				user.setNome(nome);
+				System.out.print("Inserir telefone ");
+				sc = new Scanner(System.in);
+				telefone = sc.nextInt();
+				user.setTelefone(telefone);
+				System.out.print("Inserir email ");
+				sc = new Scanner(System.in);
+				String email = sc.nextLine();
+				user.setEmail(email);
+				System.out.print("Inserir senha ");
+				sc = new Scanner(System.in);
+				String senha = sc.nextLine();
+				user.setSenha(senha);
+				usuarioDao.editarUsuario(usuario);
+				
+			case 10:
+				System.out.println("Tem certeza que quer fazer isso? (S ou N)");
+				String resposta = sc.next();
+				if(resposta == "S") {
+					usuarioDao.deleteUser(usuario);
+				}
+			case 11:
 				c = false;
 				break;
 			default:
@@ -472,5 +565,4 @@ public class Main {
 		}
 		System.out.println("Programa encerrado -_-");
 	}
-}
 }
