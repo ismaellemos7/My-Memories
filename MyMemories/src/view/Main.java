@@ -18,7 +18,7 @@ public class Main {
 		boolean c = true, login = false;
 		Usuario usuario = null;
 		int n, n2;
-		while(login == false) {
+		/*while(login == false) {
 			System.out.println("1) Realizar Login");
 			System.out.println("2) Cadastrar Usuario");
 			System.out.println("3) Encerrar Programa");
@@ -68,7 +68,7 @@ public class Main {
 			default:
 				System.out.println("Opção invalida");
 			}
-		}
+		}*/
 
 
 		while(c) {

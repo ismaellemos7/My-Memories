@@ -18,7 +18,7 @@ public class Main {
 		boolean c = true, login = false;
 		Usuario usuario = null;
 		int n, n2;
-		while(login == false) {
+		/*while(login == false) {
 			System.out.println("1) Realizar Login");
 			System.out.println("2) Cadastrar Usuario");
 			System.out.println("3) Encerrar Programa");
@@ -68,7 +68,7 @@ public class Main {
 			default:
 				System.out.println("Opção invalida");
 			}
-		}
+		}*/
 
 
 		while(c) {
@@ -134,7 +134,7 @@ public class Main {
 					data_comemorativa.setLocal(local);
 					tipo.setId(2);
 					tipo.setNome("Data_Comemorativa");
-					lembrancaDao.criarLembranca(usuario, data_comemorativa, tipo);
+					lembrancaDao.create(data_comemorativa);
 					break;
 				case 2:
 					Evento evento = new Evento();
@@ -144,7 +144,7 @@ public class Main {
 					evento.setLocal(local);
 					tipo.setId(3);
 					tipo.setNome("Evento");
-					lembrancaDao.criarLembranca(usuario, evento, tipo);
+					//lembrancaDao.criarLembranca(usuario, evento, tipo);
 					break;
 				case 3:
 					Compartilhada compartilhada = new Compartilhada();
@@ -154,7 +154,7 @@ public class Main {
 					compartilhada.setLocal(local);
 					tipo.setId(4);
 					tipo.setNome("Compartilhada");
-					lembrancaDao.criarLembranca(usuario, compartilhada, tipo);
+					//lembrancaDao.criarLembranca(usuario, compartilhada, tipo);
 					break;
 				case 4:
 					Amorosa amorosa = new Amorosa();
@@ -164,7 +164,7 @@ public class Main {
 					amorosa.setLocal(local);
 					tipo.setId(6);
 					tipo.setNome("Amorosa");
-					lembrancaDao.criarLembranca(usuario, amorosa, tipo);
+					//lembrancaDao.criarLembranca(usuario, amorosa, tipo);
 					break;
 				case 5:
 					Religiosa religiosa = new Religiosa();
@@ -174,7 +174,7 @@ public class Main {
 					religiosa.setLocal(local);
 					tipo.setId(7);
 					tipo.setNome("Religiosa");
-					lembrancaDao.criarLembranca(usuario, religiosa, tipo);
+					//lembrancaDao.criarLembranca(usuario, religiosa, tipo);
 					break;
 				case 6:
 					Familiar familiar = new Familiar();
@@ -184,7 +184,7 @@ public class Main {
 					familiar.setLocal(local);
 					tipo.setId(1);
 					tipo.setNome("Familiar");
-					lembrancaDao.criarLembranca(usuario, familiar, tipo);
+					//lembrancaDao.criarLembranca(usuario, familiar, tipo);
 					break;
 				case 7:
 					De_Alguem de_alguem = new De_Alguem();
@@ -194,7 +194,7 @@ public class Main {
 					de_alguem.setLocal(local);
 					tipo.setId(5);
 					tipo.setNome("Pessoal");
-					lembrancaDao.criarLembranca(usuario, de_alguem, tipo);
+					//lembrancaDao.criarLembranca(usuario, de_alguem, tipo);
 					break;
 				default:
 					System.out.println("\nOpção invalida\n");
@@ -214,6 +214,9 @@ public class Main {
 				switch(n) {
 				case 1:
 					System.out.println("Listando por ano...");
+					for(Lembranca lb: lembrancaDao.read()) {
+						System.out.println(lb.getData());
+					}
 					break;
 				case 2:
 					System.out.println("Listando por mês...");
@@ -503,7 +506,8 @@ public class Main {
 				sc = new Scanner(System.in);
 				int telefone = sc.nextInt();
 				contato.setTelefone(telefone);
-				contatoDao.criarContato(contato, usuario);
+				contato.setId_usuario(11);
+				contatoDao.create(contato);
 				
 			case 6:
 				contato = new Contato();
@@ -515,18 +519,21 @@ public class Main {
 				sc = new Scanner(System.in);
 				telefone = sc.nextInt();
 				contato.setTelefone(telefone);
-				contatoDao.editarContoto(contato);
+				//contatoDao.editarContoto(contato);
 			case 7:	
 				contato = new Contato();
 				System.out.print("Digite o novo telefone");
 				sc = new Scanner(System.in);
 				telefone = sc.nextInt();
 				contato.setTelefone(telefone);
-				contatoDao.deletarContato(contato);
+				//contatoDao.deletarContato(contato);
 				
 			case 8:
 				System.out.println("Listando contatos");
-				contatoDao.listarContatos(usuario);
+				contatoDao.read();
+				for(Contato co: contatoDao.read()) {
+					System.out.println(co.getNome() + " " + co.getTelefone());
+				}
 				
 			case 9:
 				System.out.println("Edite os dados da sua conta");

@@ -14,6 +14,10 @@ import model.Usuario;
 
 
 public class ContatoDao {
+	private Connection conn = null;
+	private Statement stmt = null;
+	private ResultSet rs = null;
+	
 	public boolean criarContato(Contato contato, Usuario usuario) throws Throwable {
 		Usuario user = new Usuario();
 		Conexao con = new Conexao();
@@ -41,6 +45,20 @@ public class ContatoDao {
 
 	}
 	
+	public void listarContatos2() {
+		try {
+			String query = "SELECT * FROM mymemories.contato;";
+			this.rs = stmt.executeQuery(query);
+			this.stmt = this.conn.createStatement();
+			
+			while(rs.next()) {
+				System.out.println("ID: " + rs.getString("idContato") + " Nome: "+ rs.getString("nome") + " Telefone: " + rs.getString("numero"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public ArrayList<Contato> listarContatos(Usuario usuario) {
 		ArrayList<Contato> contatos = new ArrayList<>();
