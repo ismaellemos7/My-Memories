@@ -21,11 +21,12 @@ public class LembrancaDao {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("INSERT INTO lembranca (titulo, texto, data, local) VALUES(?, ?, ?, ?)");
+			stmt = con.prepareStatement("INSERT INTO lembranca (titulo, texto, data, local, dono_lembranca, tipo_de_lembranca) VALUES(?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, l.getTitulo());
 			stmt.setString(2, l.getTexto());
 			stmt.setDate(3, new java.sql.Date(l.getData().getTime()));
 			stmt.setString(4, l.getLocal());
+                        
 
 			stmt.executeUpdate();
 

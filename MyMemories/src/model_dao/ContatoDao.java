@@ -69,11 +69,11 @@ public class ContatoDao {
 				Statement stmt = conn.createStatement();
 				ResultSet rs;
 
-				rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + usuario.getId() + "'");
+				rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + 3 +"'");
 
 				while ( rs.next() ) {
 					Contato contato = new Contato();
-					contato.setId(rs.getInt("id"));
+					contato.setId(rs.getInt("idContato"));
 					contato.setNome(rs.getString("nome"));
 					contato.setTelefone((int) rs.getInt("Numero"));
 					contato.setContato_usuario(rs.getInt("contato_usuario"));

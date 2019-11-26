@@ -97,7 +97,7 @@ public class UsuarioDao {
                 rs = stmt.executeQuery("select * from Usuario where Telefone='"+Telefone+"' and senha='"+senha+"'");
                 
                 if(rs.next()){
-                    usuario.setId(rs.getInt("id"));
+                    usuario.setId(rs.getInt("idUsuario"));
                     usuario.setNome(rs.getString("nome"));
                     usuario.setEmail(rs.getString("email"));
                     usuario.setSenha(rs.getString("senha"));

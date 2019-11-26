@@ -134,6 +134,7 @@ public class Main {
 					data_comemorativa.setLocal(local);
 					tipo.setId(2);
 					tipo.setNome("Data_Comemorativa");
+                                        data_comemorativa.set
 					lembrancaDao.create(data_comemorativa);
 					break;
 				case 2:
@@ -534,7 +535,7 @@ public class Main {
 				for(Contato co: contatoDao.read()) {
 					System.out.println(co.getNome() + " " + co.getTelefone());
 				}
-				
+				break;
 			case 9:
 				System.out.println("Edite os dados da sua conta");
 				Usuario user = new Usuario();

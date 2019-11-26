@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public class Conexao {
 
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/MyMemories";
+	private static final String URL = "jdbc:mysql://localhost:3306/MyMemories?useTimezone=true&serverTimezone=UTC";
 	private static final String USER = "root";
-	private static final String PASS = "";
+	private static final String PASS = "senha";
 
 	public static Connection getConnection() {
 
@@ -21,7 +21,7 @@ public class Conexao {
 			return DriverManager.getConnection(URL, USER, PASS);
 
 		} catch (ClassNotFoundException | SQLException ex) {
-			throw new RuntimeException("Erro na conexão:", ex);
+			throw new RuntimeException("Erro na conexï¿½o:", ex);
 		}
 
 	}

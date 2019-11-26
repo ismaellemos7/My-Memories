@@ -18,8 +18,9 @@ public class Main {
 		boolean c = true, login = false;
 		Usuario usuario = null;
 		int n, n2;
-		/*while(login == false) {
-			System.out.println("1) Realizar Login");
+		while(login == false) {
+                        System.out.println(usuario.getNome());
+                        System.out.println("1) Realizar Login");
 			System.out.println("2) Cadastrar Usuario");
 			System.out.println("3) Encerrar Programa");
 			System.out.print("\nDigite uma opção: ");
@@ -68,7 +69,7 @@ public class Main {
 			default:
 				System.out.println("Opção invalida");
 			}
-		}*/
+		}
 
 
 		while(c) {
@@ -238,21 +239,57 @@ public class Main {
 					switch(n) {
 					case 1:
 						System.out.println("Data Comemorativa");
+                                                Tipo_Lembranca tipoL = new Tipo_Lembranca();
+                                                tipoL.setId(2);
+                                                tipoL.setNome("Data_Comemorativa");
+                                                for(Lembranca l: lembrancaDao.listarLembrancas(tipoL)) {
+                                                    System.out.println(l.getTitulo());
+                                                }
 						break;
 					case 2:
 						System.out.println("Evento");
+                                                tipoL = new Tipo_Lembranca();
+                                                tipoL.setId(3);
+                                                tipoL.setNome("Evento");
+                                                for(Lembranca l: lembrancaDao.listarLembrancas(tipoL)) {
+                                                    System.out.println(l.getTitulo());
+                                                }
 						break;
 					case 3:
 						System.out.println("Com Amigos");
+                                                tipoL = new Tipo_Lembranca();
+                                                tipoL.setId(4);
+                                                tipoL.setNome("Com Amigos");
+                                                for(Lembranca l: lembrancaDao.listarLembrancas(tipoL)) {
+                                                    System.out.println(l.getTitulo());
+                                                }
 						break;
 					case 4:
 						System.out.println("Amorosa");
+                                                tipoL = new Tipo_Lembranca();
+                                                tipoL.setId(6);
+                                                tipoL.setNome("Amorosa");
+                                                for(Lembranca l: lembrancaDao.listarLembrancas(tipoL)) {
+                                                    System.out.println(l.getTitulo());
+                                                }
 						break;
 					case 5:
 						System.out.println("Religiosa");
+                                                tipoL = new Tipo_Lembranca();
+                                                tipoL.setId(7);
+                                                tipoL.setNome("Religiosa");
+                                                for(Lembranca l: lembrancaDao.listarLembrancas(tipoL)) {
+                                                    System.out.println(l.getTitulo());
+                                                }
 						break;
 					case 6:
 						System.out.println("Familiar");
+                                                tipoL = new Tipo_Lembranca();
+                                                tipoL.setId(1);
+                                                tipoL.setNome("Familiar");
+                                                for(Lembranca l: lembrancaDao.listarLembrancas(tipoL)) {
+                                                    System.out.println(l.getTitulo());
+                                                }
 						break;
 					case 7:
 						System.out.println("De alguém");
@@ -526,8 +563,10 @@ public class Main {
 				
 			case 8:
 				System.out.println("Listando contatos");
-				contatoDao.listarContatos(usuario);
-				
+				for(Contato co: contatoDao.listarContatos(usuario)){
+                                    System.out.println(co.getNome());
+                                }
+				break;
 			case 9:
 				System.out.println("Edite os dados da sua conta");
 				Usuario user = new Usuario();
