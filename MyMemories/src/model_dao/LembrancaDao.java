@@ -4,6 +4,12 @@ import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+package model_dao;
+
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +34,7 @@ public class LembrancaDao {
 		preparedStmt.setString (2, lembranca.getTexto());
 		preparedStmt.setDate (3, new java.sql.Date(lembranca.getData().getTime()));
 		preparedStmt.setString (4, lembranca.getLocal());
-		preparedStmt.setInt (5, 6);
+		preparedStmt.setInt (5, usuario.getId());
 		preparedStmt.setInt (6, tipo.getId());
 		preparedStmt.execute();
 		conn.close();
@@ -48,7 +54,7 @@ public class LembrancaDao {
 		return true;	
 	}
 	
-        public ArrayList<Lembranca> listarLembrancas(Tipo_Lembranca tipo) {
+        public ArrayList<Lembranca> listarLembrancas(Tipo_Lembranca tipo, Usuario usuario) {
 		ArrayList<Lembranca> lembrancas = new ArrayList<>();
 		try {
 			Conexao dados_con = new Conexao();
@@ -57,7 +63,7 @@ public class LembrancaDao {
 				Statement stmt = conn.createStatement();
 				ResultSet rs;
 
-				rs = stmt.executeQuery("SELECT * FROM Lembranca Where dono_lembranca='" + 6 +"'");
+				rs = stmt.executeQuery("SELECT * FROM Lembranca Where dono_lembranca='" + usuario.getId() +"' and Tipo_de_lembranca='" + tipo.getId() +"'");
 
 				while ( rs.next() ) {
 					Lembranca lembranca = new Lembranca();
@@ -66,7 +72,94 @@ public class LembrancaDao {
                                         lembranca.setTexto(rs.getString("Texto"));
 					lembranca.setData(rs.getDate("Data"));
 					lembranca.setLocal(rs.getString("Local"));
-					//if(lembranca.getContato_usuario()!=null) contato.setAtivo(true);
+					lembrancas.add(lembranca);
+				}
+				conn.close();
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new RuntimeException ("Erro ao carregar os dados: "+ e);
+		}
+		return lembrancas;
+	}
+        
+        
+        public ArrayList<Lembranca> listarLembrancasPorAno(Usuario usuario, String ano ) {
+		ArrayList<Lembranca> lembrancas = new ArrayList<>();
+		try {
+			Conexao dados_con = new Conexao();
+			Class.forName(dados_con.getDriver());
+			try (Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha())) {
+				Statement stmt = conn.createStatement();
+				ResultSet rs;
+
+				rs = stmt.executeQuery("SELECT * FROM Lembranca Where dono_lembranca='" + usuario.getId() +"' and YEAR(Data) = '" + ano +"'");
+
+				while ( rs.next() ) {
+					Lembranca lembranca = new Lembranca();
+					lembranca.setIdLembranca(rs.getInt("idLembranca"));
+					lembranca.setTitulo(rs.getString("Titulo"));
+                                        lembranca.setTexto(rs.getString("Texto"));
+					lembranca.setData(rs.getDate("Data"));
+					lembranca.setLocal(rs.getString("Local"));
+					lembrancas.add(lembranca);
+				}
+				conn.close();
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new RuntimeException ("Erro ao carregar os dados: "+ e);
+		}
+		return lembrancas;
+	}
+        
+        public ArrayList<Lembranca> listarLembrancasPorMes(Usuario usuario, String mes ) {
+		ArrayList<Lembranca> lembrancas = new ArrayList<>();
+		try {
+			Conexao dados_con = new Conexao();
+			Class.forName(dados_con.getDriver());
+			try (Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha())) {
+				Statement stmt = conn.createStatement();
+				ResultSet rs;
+
+				rs = stmt.executeQuery("SELECT * FROM Lembranca Where dono_lembranca='" + usuario.getId() +"' and MONTH(Data) = '" + mes +"'");
+
+				while ( rs.next() ) {
+					Lembranca lembranca = new Lembranca();
+					lembranca.setIdLembranca(rs.getInt("idLembranca"));
+					lembranca.setTitulo(rs.getString("Titulo"));
+                                        lembranca.setTexto(rs.getString("Texto"));
+					lembranca.setData(rs.getDate("Data"));
+					lembranca.setLocal(rs.getString("Local"));
+					lembrancas.add(lembranca);
+				}
+				conn.close();
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new RuntimeException ("Erro ao carregar os dados: "+ e);
+		}
+		return lembrancas;
+	}
+        
+        public ArrayList<Lembranca> listarLembrancasPorDia(Usuario usuario, String dia ) {
+		ArrayList<Lembranca> lembrancas = new ArrayList<>();
+		try {
+			Conexao dados_con = new Conexao();
+			Class.forName(dados_con.getDriver());
+			try (Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha())) {
+				Statement stmt = conn.createStatement();
+				ResultSet rs;
+
+				rs = stmt.executeQuery("SELECT * FROM Lembranca Where dono_lembranca='" + usuario.getId() +"' and DAY(Data) = '" + dia +"'");
+
+				while ( rs.next() ) {
+					Lembranca lembranca = new Lembranca();
+					lembranca.setIdLembranca(rs.getInt("idLembranca"));
+					lembranca.setTitulo(rs.getString("Titulo"));
+                                        lembranca.setTexto(rs.getString("Texto"));
+					lembranca.setData(rs.getDate("Data"));
+					lembranca.setLocal(rs.getString("Local"));
 					lembrancas.add(lembranca);
 				}
 				conn.close();
