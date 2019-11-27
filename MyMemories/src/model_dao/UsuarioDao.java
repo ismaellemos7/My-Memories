@@ -57,12 +57,12 @@ public class UsuarioDao {
 			Conexao dados_con = new Conexao();
 			Class.forName(dados_con.getDriver());
 			Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha());
-			String query = "update usuario set nome=?, email=?, senha=? where id=?";
+			String query = "update usuario set nome=?, email=?, senha=?, Telefone=? where idUsuario='" + usuario.getId() + "'";
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
 			preparedStmt.setString (1, usuario.getNome());
-			preparedStmt.setNString (2, usuario.getSenha());
-			preparedStmt.setString(3, usuario.getEmail());
-			if(usuario.getTelefone() != 0) preparedStmt.setInt (4, usuario.getTelefone());
+			preparedStmt.setString(2, usuario.getEmail());
+                        preparedStmt.setNString (3, usuario.getSenha());
+			preparedStmt.setInt (4, usuario.getTelefone());
 			preparedStmt.executeUpdate();
 			conn.close();
 			return true;
