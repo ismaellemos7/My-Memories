@@ -19,9 +19,9 @@ public class Main {
         Usuario usuario = null;
         int n, n2;
         while (login == false) {
-            System.out.println("1) Realizar Login"); // feio
-            System.out.println("2) Cadastrar Usuario"); // feio
-            System.out.println("3) Encerrar Programa"); // feio
+            System.out.println("1) Realizar Login"); // feito
+            System.out.println("2) Cadastrar Usuario"); // feito
+            System.out.println("3) Encerrar Programa"); // feito
             System.out.print("\nDigite uma opção: ");
             n2 = sc.nextInt();
             System.out.print("\n\n");
@@ -75,15 +75,15 @@ public class Main {
                 while (c) {
                     System.out.println("1) Criar nova Lembrança"); // feito
                     System.out.println("2) Listar Lembranças"); // feito
-                    System.out.println("3) Deletar Lembrança");
-                    System.out.println("4) Editar Lembrança");
+                    System.out.println("3) Deletar Lembrança"); // feito
+                    System.out.println("4) Editar Lembrança"); // feito
                     System.out.println("5) Criar novo contato"); // feito
-                    System.out.println("6) Editar contato");
-                    System.out.println("7) Deletar contato");
+                    System.out.println("6) Editar contato"); // feito
+                    System.out.println("7) Deletar contato"); // feito
                     System.out.println("8) Listar contatos"); // feito
-                    System.out.println("9) Editar dados da conta"); // feio
-                    System.out.println("10) Deletar sua conta"); // feio
-                    System.out.println("11) Sair"); // feio
+                    System.out.println("9) Editar dados da conta"); // feito
+                    System.out.println("10) Deletar sua conta"); // feito
+                    System.out.println("11) Sair"); // feito
 
                     System.out.print("\nDigite uma opção: ");
                     n = sc.nextInt();
@@ -326,234 +326,78 @@ public class Main {
                             break;
                         case 3:
                             System.out.println("========== Deletar Lembrança ==========");
-                            System.out.println("Escolha o tipo da Lembrança que você quer deletar:");
-                            System.out.println("1) Data Comemorativa");
-                            System.out.println("2) Evento");
-                            System.out.println("3) Com Amigos");
-                            System.out.println("4) Amorosa");
-                            System.out.println("5) Religiosa");
-                            System.out.println("6) Familiar");
-                            System.out.println("7) De alguém");
-                            sc = new Scanner(System.in);
-                            System.out.print("\nDigite uma opção: ");
-                            n = sc.nextInt();
-                            System.out.print("\n\n");
-                            switch (n) {
-                                case 1:
-                                    System.out.println("Data Comemorativa");
-                                    break;
-                                case 2:
-                                    System.out.println("Evento");
-                                    break;
-                                case 3:
-                                    System.out.println("Com Amigos");
-                                    break;
-                                case 4:
-                                    System.out.println("Amorosa");
-                                    break;
-                                case 5:
-                                    System.out.println("Religiosa");
-                                    break;
-                                case 6:
-                                    System.out.println("Familiar");
-                                    break;
-                                case 7:
-                                    System.out.println("De alguém");
-                                    break;
-                                default:
-                                    System.out.println("\nOpção invalida\n");
+                            for (Lembranca l : lembrancaDao.listarTodasLembrancas(usuario)) {
+                                System.out.println(l.getTitulo());
                             }
+                            System.out.print("Ditige o titulo da lembrança que você que deletar: ");
+                            sc = new Scanner(System.in);
+                            String t = sc.nextLine();
+                            lembrancaDao.deleteLembranca(t, usuario);
                             break;
 
                         case 4:
                             System.out.println("========== Editar Lembranças ==========");
-                            System.out.println("Escolha o tipo da Lembrança que você quer editar:");
-                            System.out.println("1) Data Comemorativa");
-                            System.out.println("2) Evento");
-                            System.out.println("3) Com Amigos");
-                            System.out.println("4) Amorosa");
-                            System.out.println("5) Religiosa");
-                            System.out.println("6) Familiar");
-                            System.out.println("7) De alguém");
-                            sc = new Scanner(System.in);
-                            System.out.print("\nDigite uma opção: ");
-                            n = sc.nextInt();
-                            System.out.print("\n\n");
-                            switch (n) {
-                                case 1:
-                                    System.out.println("========== Criar nova lembrança ==========");
-                                    System.out.println("\tTipo de Lembrança");
-                                    System.out.println("1) Data Comemorativa");
-                                    System.out.println("2) Evento");
-                                    System.out.println("3) Com Amigos");
-                                    System.out.println("4) Amorosa");
-                                    System.out.println("5) Religiosa");
-                                    System.out.println("6) Familiar");
-                                    System.out.println("7) De alguém");
-                                    sc = new Scanner(System.in);
-                                    System.out.print("\nDigite uma opção: ");
-                                    n = sc.nextInt();
-                                    System.out.print("\n\n");
-                                    switch (n) {
-                                        case 1:
-                                            Data_Comemorativa data_comemorativa = new Data_Comemorativa();
-                                            System.out.print("Titulo: ");
-                                            sc = new Scanner(System.in);
-                                            String Titulo = sc.nextLine();
-                                            System.out.print("Texto: ");
-                                            sc = new Scanner(System.in);
-                                            String Texto = sc.nextLine();
-                                            try {
-                                                System.out.println("Data");
-                                                String date = sc.next();
-                                                DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                                Date d = data.parse(date);
-                                                System.out.println(d);
-                                                da = data.parse(date);
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                            System.out.println("Local: ");
-                                            local = sc.nextLine();
-                                            System.out.println("Data Comemorativa Criada");
-                                            break;
-                                        case 2:
-                                            Evento evento = new Evento();
-                                            System.out.print("Titulo: ");
-                                            sc = new Scanner(System.in);
-                                            Titulo = sc.nextLine();
-                                            System.out.print("Texto: ");
-                                            sc = new Scanner(System.in);
-                                            Texto = sc.nextLine();
-                                            try {
-                                                System.out.println("Data");
-                                                String date = sc.next();
-                                                DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                                Date d = data.parse(date);
-                                                System.out.println(d);
-                                                da = data.parse(date);
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                            System.out.println("Local: ");
-                                            local = sc.nextLine();
-                                            System.out.println("Evento criado");
-                                            break;
-                                        case 3:
-                                            Compartilhada compartilhada = new Compartilhada();
-                                            System.out.print("Titulo: ");
-                                            sc = new Scanner(System.in);
-                                            Titulo = sc.nextLine();
-                                            System.out.print("Texto: ");
-                                            sc = new Scanner(System.in);
-                                            Texto = sc.nextLine();
-                                            try {
-                                                System.out.println("Data");
-                                                String date = sc.next();
-                                                DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                                Date d = data.parse(date);
-                                                System.out.println(d);
-                                                da = data.parse(date);
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                            System.out.println("Local: ");
-                                            local = sc.nextLine();
-                                            System.out.println("Lembrança compartilhada adicionada");
-                                            break;
-                                        case 4:
-                                            Amorosa amorosa = new Amorosa();
-                                            System.out.print("Titulo: ");
-                                            sc = new Scanner(System.in);
-                                            Titulo = sc.nextLine();
-                                            System.out.print("Texto: ");
-                                            sc = new Scanner(System.in);
-                                            Texto = sc.nextLine();
-                                            try {
-                                                System.out.println("Data");
-                                                String date = sc.next();
-                                                DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                                Date d = data.parse(date);
-                                                System.out.println(d);
-                                                da = data.parse(date);
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                            System.out.println("Local: ");
-                                            local = sc.nextLine();
-                                            System.out.println("Lembraça Amorosa criada");
-                                            break;
-                                        case 5:
-                                            Religiosa religiosa = new Religiosa();
-                                            System.out.print("Titulo: ");
-                                            sc = new Scanner(System.in);
-                                            Titulo = sc.nextLine();
-                                            System.out.print("Texto: ");
-                                            sc = new Scanner(System.in);
-                                            Texto = sc.nextLine();
-                                            try {
-                                                System.out.println("Data");
-                                                String date = sc.next();
-                                                DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                                Date d = data.parse(date);
-                                                System.out.println(d);
-                                                da = data.parse(date);
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                            System.out.println("Local: ");
-                                            local = sc.nextLine();
-                                            System.out.println("Religiosa criada");
-                                            break;
-                                        case 6:
-                                            Familiar familiar = new Familiar();
-                                            System.out.print("Titulo: ");
-                                            sc = new Scanner(System.in);
-                                            Titulo = sc.nextLine();
-                                            System.out.print("Texto: ");
-                                            sc = new Scanner(System.in);
-                                            Texto = sc.nextLine();
-                                            try {
-                                                System.out.println("Data");
-                                                String date = sc.next();
-                                                DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                                Date d = data.parse(date);
-                                                System.out.println(d);
-                                                da = data.parse(date);
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                            System.out.println("Local: ");
-                                            local = sc.nextLine();
-                                            System.out.println("Familiar criada");
-                                            break;
-                                        case 7:
-                                            Pessoal de_alguem = new Pessoal();
-                                            System.out.print("Titulo: ");
-                                            sc = new Scanner(System.in);
-                                            Titulo = sc.nextLine();
-                                            System.out.print("Texto: ");
-                                            sc = new Scanner(System.in);
-                                            Texto = sc.nextLine();
-                                            try {
-                                                System.out.println("Data");
-                                                String date = sc.next();
-                                                DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                                Date d = data.parse(date);
-                                                System.out.println(d);
-                                                da = data.parse(date);
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                            System.out.println("Local: ");
-                                            local = sc.nextLine();
-                                            System.out.println("De alguém");
-                                            break;
-                                        default:
-                                            System.out.println("\nOpção invalida\n");
-                                    }
-                                    break;
+                            for (Lembranca l : lembrancaDao.listarTodasLembrancas(usuario)) {
+                                System.out.println(l.getTitulo());
                             }
+                            System.out.print("Ditige o titulo da lembrança que você que editar: ");
+                            sc = new Scanner(System.in);
+                            String tit = sc.nextLine();
+                            Lembranca lembranca = lembrancaDao.getLembranca(usuario, tit);
+                            System.out.print("Você deseja alterar o titulo da lembrança digite S para sim e N para não: ");
+                            sc = new Scanner(System.in);
+                            String r = sc.next();
+                            if (r.charAt(0) == 83) {
+                                System.out.print("Titulo: ");
+                                sc = new Scanner(System.in);
+                                titulo = sc.nextLine();
+                                lembranca.setTitulo(titulo);
+                            }
+                            System.out.print("Você deseja alterar o Texto da lembrança digite S para sim e N para não: ");
+                            sc = new Scanner(System.in);
+                            String rtex = sc.next();
+                            if (rtex.charAt(0) == 83) {
+                                System.out.print("Texto: ");
+                                sc = new Scanner(System.in);
+                                texto = sc.nextLine();
+                                lembranca.setTexto(texto);
+                            }
+
+                            System.out.print("Você deseja alterar o data da lembrança digite S para sim e N para não: ");
+                            sc = new Scanner(System.in);
+                            String rd = sc.next();
+                            if (rd.charAt(0) == 83) {
+                                da = null;
+                                try {
+                                    System.out.println("Data");
+                                    String date = sc.next();
+                                    DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date d = data.parse(date);
+                                    da = data.parse(date);
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+                                lembranca.setData(da);
+                            }
+
+                            System.out.print("Você deseja alterar o local da lembrança digite S para sim e N para não: ");
+                            sc = new Scanner(System.in);
+                            String rl = sc.next();
+                            if (rl.charAt(0) == 83) {
+                                System.out.println("Local: ");
+                                sc = new Scanner(System.in);
+                                local = sc.nextLine();
+                                lembranca.setLocal(local);
+                            }
+                            if (rl.charAt(0) == 83 || rd.charAt(0) == 83 || rtex.charAt(0) == 83 || r.charAt(0) == 83) {
+                                lembrancaDao.editarLembranca(lembranca, tit);
+                                System.out.println("Lembrança editada com sucesso");
+                            }
+                            else{
+                                System.out.println("Não houve alterações");
+                            }
+                            break;
+
                         case 5:
                             Contato contato = new Contato();
                             System.out.print("Digite o nome do contato que você quer inserir");
@@ -569,24 +413,43 @@ public class Main {
                             contatoDao.criarContato(contato);
                             break;
                         case 6:
-                            contato = new Contato();
-                            System.out.print("Digite o novo nome do contato");
+                            System.out.print("Digine o nome do contato que você que editar: ");
                             sc = new Scanner(System.in);
-                            nome = sc.nextLine();
-                            contato.setNome(nome);
-                            System.out.print("Digite o novo telefone");
+                            String nomeContato = sc.nextLine();
+                            contato = contatoDao.getContato(usuario, nomeContato);
+                            System.out.print("Se você deseja alterar o nome do contato digite S para sim e N para não: ");
                             sc = new Scanner(System.in);
-                            telefone = sc.nextInt();
-                            contato.setTelefone(telefone);
-                            contatoDao.editarContoto(contato);
+                            String rno = sc.next();
+                            if (rno.charAt(0) == 83) {
+                                System.out.print("Digite o novo nome do contato: ");
+                                sc = new Scanner(System.in);
+                                nome = sc.nextLine();
+                                contato.setNome(nome);
+                            }
+                            System.out.print("Se você deseja alterar o telefone do contato digite S para sim e N para não: ");
+                            sc = new Scanner(System.in);
+                            String rte = sc.next();
+                            if (rte.charAt(0) == 83) {
+                                System.out.print("Digite o novo telefone: ");
+                                sc = new Scanner(System.in);
+                                telefone = sc.nextInt();
+                                contato.setTelefone(telefone);
+                            }
+                            if (rno.charAt(0) == 83 || rte.charAt(0) == 83) {
+                                contatoDao.editarContoto(contato);
+                                System.out.println("Contato alterado com sucesso");
+                            } else {
+                                System.out.println("Não forão feitas Alterações");
+                            }
                             break;
                         case 7:
                             contato = new Contato();
-                            System.out.print("Digite o novo telefone");
+                            System.out.print("Digite o Nome do contato que você quer deletar: ");
                             sc = new Scanner(System.in);
-                            telefone = sc.nextInt();
-                            contato.setTelefone(telefone);
+                            nome = sc.nextLine();
+                            contato = contatoDao.getContato(usuario, nome);
                             contatoDao.deletarContato(contato);
+                            System.out.println("Contato deletado com Sucesso");
                             break;
                         case 8:
                             System.out.println("Listando contatos");
@@ -635,10 +498,9 @@ public class Main {
                                 String senha = sc.nextLine();
                                 usuario.setSenha(senha);
                             }
-                            if(rn.charAt(0) == 83 || rt.charAt(0) == 83 || re.charAt(0) == 83 || rs.charAt(0) == 83){
+                            if (rn.charAt(0) == 83 || rt.charAt(0) == 83 || re.charAt(0) == 83 || rs.charAt(0) == 83) {
                                 usuarioDao.editarUsuario(usuario);
-                            }
-                            else{
+                            } else {
                                 System.out.println("Não houve alterações");
                             }
                             break;
@@ -650,8 +512,7 @@ public class Main {
                                 c = false;
                                 login = false;
                                 System.out.println("Você deletou sua conta!");
-                            }
-                            else{
+                            } else {
                                 System.out.println("Sua conta não foi deletada");
                             }
                             break;

@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 public class Conexao {
 	private static String driver = "com.mysql.cj.jdbc.Driver";
 	private static String user = "root";
-	private static String senha = "senha";
-	private static String url = "jdbc:mysql://localhost:3306/MyMemories?useTimezone=true&serverTimezone=UTC";
+	private static String senha = "";
+	private static String url = "jdbc:mysql://localhost:3306/mymemories?useTimezone=true&serverTimezone=UTC";
 
 
 
