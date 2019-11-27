@@ -73,14 +73,14 @@ public class Main {
             }
             if (login == true) {
                 while (c) {
-                    System.out.println("1) Criar nova Lembrança");
-                    System.out.println("2) Listar Lembranças");
+                    System.out.println("1) Criar nova Lembrança"); // feito
+                    System.out.println("2) Listar Lembranças"); // feito
                     System.out.println("3) Deletar Lembrança");
                     System.out.println("4) Editar Lembrança");
-                    System.out.println("5) Criar novo contato");
+                    System.out.println("5) Criar novo contato"); // feito
                     System.out.println("6) Editar contato");
                     System.out.println("7) Deletar contato");
-                    System.out.println("8) Listar contatos");
+                    System.out.println("8) Listar contatos"); // feito
                     System.out.println("9) Editar dados da conta");
                     System.out.println("10) Deletar sua conta");
                     System.out.println("11) Sair");
@@ -218,7 +218,7 @@ public class Main {
                                     sc = new Scanner(System.in);
                                     String ano = sc.next();
                                     System.out.println("Listando por ano...");
-                                    for(Lembranca l: lembrancaDao.listarLembrancasPorAno(usuario, ano)){
+                                    for (Lembranca l : lembrancaDao.listarLembrancasPorAno(usuario, ano)) {
                                         System.out.println(l.getTitulo());
                                     }
                                     break;
@@ -227,7 +227,7 @@ public class Main {
                                     sc = new Scanner(System.in);
                                     String mes = sc.next();
                                     System.out.println("Listando por mes...");
-                                    for(Lembranca l: lembrancaDao.listarLembrancasPorMes(usuario, mes)){
+                                    for (Lembranca l : lembrancaDao.listarLembrancasPorMes(usuario, mes)) {
                                         System.out.println(l.getTitulo());
                                     }
                                     break;
@@ -236,7 +236,7 @@ public class Main {
                                     sc = new Scanner(System.in);
                                     String dia = sc.next();
                                     System.out.println("Listando por dia...");
-                                    for(Lembranca l: lembrancaDao.listarLembrancasPorDia(usuario, dia)){
+                                    for (Lembranca l : lembrancaDao.listarLembrancasPorDia(usuario, dia)) {
                                         System.out.println(l.getTitulo());
                                     }
                                     break;
@@ -579,7 +579,7 @@ public class Main {
                             telefone = sc.nextInt();
                             contato.setTelefone(telefone);
                             contatoDao.editarContoto(contato);
-                             break;
+                            break;
                         case 7:
                             contato = new Contato();
                             System.out.print("Digite o novo telefone");
@@ -587,7 +587,7 @@ public class Main {
                             telefone = sc.nextInt();
                             contato.setTelefone(telefone);
                             contatoDao.deletarContato(contato);
-                             break;
+                            break;
                         case 8:
                             System.out.println("Listando contatos");
                             for (Contato co : contatoDao.listarContatos(usuario)) {
@@ -596,45 +596,71 @@ public class Main {
                             break;
                         case 9:
                             System.out.println("Edite os dados da sua conta");
-                            Usuario user = new Usuario();
-                            System.out.print("Inserir nome ");
+                            System.out.print("Você deseja alterar seu nome digite S pra sim e N para não: ");
                             sc = new Scanner(System.in);
-                            nome = sc.nextLine();
-                            user.setNome(nome);
-                            System.out.print("Inserir telefone ");
+                            String rn = sc.next().toUpperCase();
+                            if (rn.charAt(0) == 83) {
+                                System.out.print("Inserir nome ");
+                                sc = new Scanner(System.in);
+                                nome = sc.nextLine();
+                                usuario.setNome(nome);
+                            }
+
+                            System.out.print("Você deseja alterar seu telefone digite S pra sim e N para não: ");
                             sc = new Scanner(System.in);
-                            telefone = sc.nextInt();
-                            user.setTelefone(telefone);
-                            System.out.print("Inserir email ");
+                            String rt = sc.next().toUpperCase();
+                            if (rt.charAt(0) == 83) {
+                                System.out.print("Inserir telefone ");
+                                sc = new Scanner(System.in);
+                                telefone = sc.nextInt();
+                                usuario.setTelefone(telefone);
+                            }
+                            System.out.print("Você deseja alterar seu email digite S pra sim e N para não: ");
                             sc = new Scanner(System.in);
-                            String email = sc.nextLine();
-                            user.setEmail(email);
-                            System.out.print("Inserir senha ");
+                            String re = sc.next().toUpperCase();
+                            if (re.charAt(0) == 83) {
+                                System.out.print("Inserir email ");
+                                sc = new Scanner(System.in);
+                                String email = sc.nextLine();
+                                usuario.setEmail(email);
+                            }
+
+                            System.out.print("Você deseja alterar sua senha digite S pra sim e N para não: ");
                             sc = new Scanner(System.in);
-                            String senha = sc.nextLine();
-                            user.setSenha(senha);
-                            usuarioDao.editarUsuario(usuario);
-                             break;
+                            String rs = sc.next().toUpperCase();
+
+                            if (rs.charAt(0) == 83) {
+                                System.out.print("Inserir senha ");
+                                sc = new Scanner(System.in);
+                                String senha = sc.nextLine();
+                                usuario.setSenha(senha);
+                            }
+                            if(rn.charAt(0) == 83 || rt.charAt(0) == 83 || re.charAt(0) == 83 || rs.charAt(0) == 83){
+                                usuarioDao.editarUsuario(usuario);
+                            }
+                            else{
+                                System.out.println("Não houve alterações");
+                            }
+                            break;
                         case 10:
                             System.out.println("Tem certeza que quer fazer isso? (S ou N)");
                             String resposta = sc.next();
                             if (resposta == "S") {
                                 usuarioDao.deleteUser(usuario);
                             }
-                             break;
+                            break;
                         case 11:
                             c = false;
-                             login = false;
-                             System.out.println("Você realizou logout -_-");
+                            login = false;
+                            System.out.println("Você realizou logout -_-");
                             break;
                         default:
                             System.out.println("\nOpção invalida\n");
                     }
 
                 }
-               
+
             }
         }
     }
 }
-
