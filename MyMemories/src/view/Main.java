@@ -67,6 +67,7 @@ public class Main {
                 case 3:
                     c = false;
                     login = true;
+                    System.out.println("O programa foi encerrado -_-");
                 default:
                     System.out.println("Opção invalida");
             }
@@ -98,7 +99,7 @@ public class Main {
                             System.out.println("4) Amorosa");
                             System.out.println("5) Religiosa");
                             System.out.println("6) Familiar");
-                            System.out.println("7) De alguém");
+                            System.out.println("7) Pessoal");
                             sc = new Scanner(System.in);
                             System.out.print("\nDigite uma opção: ");
                             n = sc.nextInt();
@@ -187,14 +188,14 @@ public class Main {
                                     lembrancaDao.criarLembranca(usuario, familiar, tipo);
                                     break;
                                 case 7:
-                                    De_Alguem de_alguem = new De_Alguem();
-                                    de_alguem.setTitulo(titulo);
-                                    de_alguem.setTexto(texto);
-                                    de_alguem.setData(da);
-                                    de_alguem.setLocal(local);
+                                    Pessoal pessoal = new Pessoal();
+                                    pessoal.setTitulo(titulo);
+                                    pessoal.setTexto(texto);
+                                    pessoal.setData(da);
+                                    pessoal.setLocal(local);
                                     tipo.setId(5);
                                     tipo.setNome("Pessoal");
-                                    lembrancaDao.criarLembranca(usuario, de_alguem, tipo);
+                                    lembrancaDao.criarLembranca(usuario, pessoal, tipo);
                                     break;
                                 default:
                                     System.out.println("\nOpção invalida\n");
@@ -213,13 +214,31 @@ public class Main {
 
                             switch (n) {
                                 case 1:
+                                    System.out.print("Digite o ano que você quer listar as lembranças: ");
+                                    sc = new Scanner(System.in);
+                                    String ano = sc.next();
                                     System.out.println("Listando por ano...");
+                                    for(Lembranca l: lembrancaDao.listarLembrancasPorAno(usuario, ano)){
+                                        System.out.println(l.getTitulo());
+                                    }
                                     break;
                                 case 2:
-                                    System.out.println("Listando por mês...");
+                                    System.out.print("Digite o mes que você quer listar as lembranças: ");
+                                    sc = new Scanner(System.in);
+                                    String mes = sc.next();
+                                    System.out.println("Listando por mes...");
+                                    for(Lembranca l: lembrancaDao.listarLembrancasPorMes(usuario, mes)){
+                                        System.out.println(l.getTitulo());
+                                    }
                                     break;
                                 case 3:
+                                    System.out.print("Digite o dia que você quer listar as lembranças: ");
+                                    sc = new Scanner(System.in);
+                                    String dia = sc.next();
                                     System.out.println("Listando por dia...");
+                                    for(Lembranca l: lembrancaDao.listarLembrancasPorDia(usuario, dia)){
+                                        System.out.println(l.getTitulo());
+                                    }
                                     break;
                                 case 4:
                                     System.out.println("\tTipo de Lembrança");
@@ -229,7 +248,7 @@ public class Main {
                                     System.out.println("4) Amorosa");
                                     System.out.println("5) Religiosa");
                                     System.out.println("6) Familiar");
-                                    System.out.println("7) De alguém");
+                                    System.out.println("7) Pessoal");
                                     sc = new Scanner(System.in);
                                     System.out.print("\nDigite uma opção: ");
                                     n = sc.nextInt();
@@ -241,7 +260,7 @@ public class Main {
                                             Tipo_Lembranca tipoL = new Tipo_Lembranca();
                                             tipoL.setId(2);
                                             tipoL.setNome("Data_Comemorativa");
-                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL)) {
+                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL, usuario)) {
                                                 System.out.println(l.getTitulo());
                                             }
                                             break;
@@ -250,7 +269,7 @@ public class Main {
                                             tipoL = new Tipo_Lembranca();
                                             tipoL.setId(3);
                                             tipoL.setNome("Evento");
-                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL)) {
+                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL, usuario)) {
                                                 System.out.println(l.getTitulo());
                                             }
                                             break;
@@ -259,7 +278,7 @@ public class Main {
                                             tipoL = new Tipo_Lembranca();
                                             tipoL.setId(4);
                                             tipoL.setNome("Com Amigos");
-                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL)) {
+                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL, usuario)) {
                                                 System.out.println(l.getTitulo());
                                             }
                                             break;
@@ -268,7 +287,7 @@ public class Main {
                                             tipoL = new Tipo_Lembranca();
                                             tipoL.setId(6);
                                             tipoL.setNome("Amorosa");
-                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL)) {
+                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL, usuario)) {
                                                 System.out.println(l.getTitulo());
                                             }
                                             break;
@@ -277,7 +296,7 @@ public class Main {
                                             tipoL = new Tipo_Lembranca();
                                             tipoL.setId(7);
                                             tipoL.setNome("Religiosa");
-                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL)) {
+                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL, usuario)) {
                                                 System.out.println(l.getTitulo());
                                             }
                                             break;
@@ -286,12 +305,18 @@ public class Main {
                                             tipoL = new Tipo_Lembranca();
                                             tipoL.setId(1);
                                             tipoL.setNome("Familiar");
-                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL)) {
+                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL, usuario)) {
                                                 System.out.println(l.getTitulo());
                                             }
                                             break;
                                         case 7:
-                                            System.out.println("De alguém");
+                                            System.out.println("Pessoal");
+                                            tipoL = new Tipo_Lembranca();
+                                            tipoL.setId(5);
+                                            tipoL.setNome("Pessoal");
+                                            for (Lembranca l : lembrancaDao.listarLembrancas(tipoL, usuario)) {
+                                                System.out.println(l.getTitulo());
+                                            }
                                             break;
                                         default:
                                             System.out.println("\nOpção invalida\n");
@@ -503,7 +528,7 @@ public class Main {
                                             System.out.println("Familiar criada");
                                             break;
                                         case 7:
-                                            De_Alguem de_alguem = new De_Alguem();
+                                            Pessoal de_alguem = new Pessoal();
                                             System.out.print("Titulo: ");
                                             sc = new Scanner(System.in);
                                             Titulo = sc.nextLine();
@@ -539,8 +564,10 @@ public class Main {
                             sc = new Scanner(System.in);
                             int telefone = sc.nextInt();
                             contato.setTelefone(telefone);
-                            contatoDao.criarContato(contato, usuario);
-
+                            contato.setId_usuario(usuario.getId());
+                            contato.setContato_usuario(null);
+                            contatoDao.criarContato(contato);
+                            break;
                         case 6:
                             contato = new Contato();
                             System.out.print("Digite o novo nome do contato");
@@ -552,6 +579,7 @@ public class Main {
                             telefone = sc.nextInt();
                             contato.setTelefone(telefone);
                             contatoDao.editarContoto(contato);
+                             break;
                         case 7:
                             contato = new Contato();
                             System.out.print("Digite o novo telefone");
@@ -559,7 +587,7 @@ public class Main {
                             telefone = sc.nextInt();
                             contato.setTelefone(telefone);
                             contatoDao.deletarContato(contato);
-
+                             break;
                         case 8:
                             System.out.println("Listando contatos");
                             for (Contato co : contatoDao.listarContatos(usuario)) {
@@ -586,25 +614,27 @@ public class Main {
                             String senha = sc.nextLine();
                             user.setSenha(senha);
                             usuarioDao.editarUsuario(usuario);
-
+                             break;
                         case 10:
                             System.out.println("Tem certeza que quer fazer isso? (S ou N)");
                             String resposta = sc.next();
                             if (resposta == "S") {
                                 usuarioDao.deleteUser(usuario);
                             }
+                             break;
                         case 11:
                             c = false;
+                             login = false;
+                             System.out.println("Você realizou logout -_-");
                             break;
                         default:
                             System.out.println("\nOpção invalida\n");
                     }
 
                 }
-                login = false;
-                System.out.println("Você realizou logout -_-");
+               
             }
         }
-        System.out.println("O programa foi encerrado -_-");
     }
 }
+
