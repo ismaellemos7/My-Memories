@@ -18,28 +18,42 @@ public class ContatoDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 	
-	public boolean criarContato(Contato contato, Usuario usuario) throws Throwable {
-		Usuario user = new Usuario();
+	public boolean criarContato(Contato contato) throws Throwable {
 		Conexao con = new Conexao();
 		Class.forName(con.getDriver());
 		Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
-		Statement stmt = conn.createStatement();
+		/*Statement stmt = conn.createStatement();
 		ResultSet rs;
 
-		rs = stmt.executeQuery("SELECT id FROM Usuario WHERE Telefone='" + contato.getTelefone() + "'");
+		rs = stmt.executeQuery("SELECT idUsuario FROM Usuario WHERE Telefone='" + contato.getTelefone() + "'");
 		if(rs.next()){
-			user.setId(rs.getInt("id"));
-        }
-		
-		String query = " insert into Contato (nome, Numero, contato_usuario, id_usuario)"
+                        if((Integer) rs.getInt("idUsuario") != null){
+                            user.setId(rs.getInt("idUsuario"));
+                        }
+                }
+                conn.close();
+                con = new Conexao();
+		Class.forName(con.getDriver());
+		conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
+                if((Integer)user.getId() != null){
+                    String query = " insert into Contato (nome, Numero, contato_usuario, id_usuario)"
 				+ " values (?, ?, ?, ?)";
-		
-		PreparedStatement preparedStmt = conn.prepareStatement(query);
-		preparedStmt.setString (1, contato.getNome());
-		preparedStmt.setInt (2, contato.getTelefone());
-		preparedStmt.setInt (3, user.getId());
-		preparedStmt.setInt (4, usuario.getId());
-		preparedStmt.execute();
+                    PreparedStatement preparedStmt = conn.prepareStatement(query);
+                    preparedStmt.setString (1, contato.getNome());
+                    preparedStmt.setInt (2, contato.getTelefone());
+                    preparedStmt.setInt (3, user.getId());
+                    preparedStmt.setInt (4, usuario.getId());
+                    preparedStmt.execute();
+                }
+                else{*/
+                    String query = " insert into Contato (nome, Numero, id_usuario)"
+				+ " values (?, ?, ?)";
+                    PreparedStatement preparedStmt = conn.prepareStatement(query);
+                    preparedStmt.setString (1, contato.getNome());
+                    preparedStmt.setInt (2, contato.getTelefone());
+                    preparedStmt.setInt (3, contato.getId_usuario());
+                    preparedStmt.execute();
+                //}
 		conn.close();
 		return true;
 
@@ -69,7 +83,7 @@ public class ContatoDao {
 				Statement stmt = conn.createStatement();
 				ResultSet rs;
 
-				rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + 3 +"'");
+				rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + usuario.getId() +"'");
 
 				while ( rs.next() ) {
 					Contato contato = new Contato();
