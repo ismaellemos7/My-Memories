@@ -19,9 +19,9 @@ public class Main {
         Usuario usuario = null;
         int n, n2;
         while (login == false) {
-            System.out.println("1) Realizar Login");
-            System.out.println("2) Cadastrar Usuario");
-            System.out.println("3) Encerrar Programa");
+            System.out.println("1) Realizar Login"); // feio
+            System.out.println("2) Cadastrar Usuario"); // feio
+            System.out.println("3) Encerrar Programa"); // feio
             System.out.print("\nDigite uma opção: ");
             n2 = sc.nextInt();
             System.out.print("\n\n");
@@ -81,9 +81,9 @@ public class Main {
                     System.out.println("6) Editar contato");
                     System.out.println("7) Deletar contato");
                     System.out.println("8) Listar contatos"); // feito
-                    System.out.println("9) Editar dados da conta");
-                    System.out.println("10) Deletar sua conta");
-                    System.out.println("11) Sair");
+                    System.out.println("9) Editar dados da conta"); // feio
+                    System.out.println("10) Deletar sua conta"); // feio
+                    System.out.println("11) Sair"); // feio
 
                     System.out.print("\nDigite uma opção: ");
                     n = sc.nextInt();
@@ -644,9 +644,15 @@ public class Main {
                             break;
                         case 10:
                             System.out.println("Tem certeza que quer fazer isso? (S ou N)");
-                            String resposta = sc.next();
-                            if (resposta == "S") {
+                            String resposta = sc.next().toUpperCase();
+                            if (resposta.charAt(0) == 83) {
                                 usuarioDao.deleteUser(usuario);
+                                c = false;
+                                login = false;
+                                System.out.println("Você deletou sua conta!");
+                            }
+                            else{
+                                System.out.println("Sua conta não foi deletada");
                             }
                             break;
                         case 11:
