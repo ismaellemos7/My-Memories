@@ -10,13 +10,13 @@ public class UsuarioDao {
 		Conexao con = new Conexao();
 		Class.forName(con.getDriver());
 		Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
-		String query = " insert into Usuario (nome, email, senha, telefone)"
-				+ " values (?, ?, ?)";
+		String query = " insert into Usuario (Nome, Email, Senha, Telefone)"
+				+ " values (?, ?, ?, ?)";
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.setString (1, usuario.getNome());
 		preparedStmt.setString (2, usuario.getEmail());
 		preparedStmt.setString (3, usuario.getSenha());
-		if(usuario.getTelefone() != 0) preparedStmt.setLong (4, usuario.getTelefone());
+		preparedStmt.setLong (4, usuario.getTelefone());
 		preparedStmt.execute();
 		conn.close();
 		return true;
