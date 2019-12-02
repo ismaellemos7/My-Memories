@@ -1,96 +1,184 @@
 package model_dao;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.JOptionPane;
 import model.Contato;
-import model_dao.Conexao;
+import model.Usuario;
 
 public class ContatoDao {
 
-	public void create(Contato l) {
+    private Connection conn = null;
+    private Statement stmt = null;
+    private ResultSet rs = null;
 
-		Connection con = Conexao.getConnection();
-		PreparedStatement stmt = null;
+    public boolean criarContato(Contato contato) throws Throwable {
+        Conexao con = new Conexao();
+        Class.forName(con.getDriver());
+        Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
+        /*Statement stmt = conn.createStatement();
+		ResultSet rs;
 
-		try {
-			stmt = con.prepareStatement("INSERT INTO lembranca (titulo, texto, data, local) VALUES(?, ?, ?, ?)");
-			stmt.setString(1, l.getTitulo());
-			stmt.setString(2, l.getTexto());
-			stmt.setDate(3, new java.sql.Date( l.getData().getTime() ));
-			stmt.setString(4, l.getLocal());
-			
-			stmt.executeUpdate();
-			
-			JOptionPane.showConfirmDialog(null, "salvo com sucesso!");
+		rs = stmt.executeQuery("SELECT idUsuario FROM Usuario WHERE Telefone='" + contato.getTelefone() + "'");
+		if(rs.next()){
+                        if((Integer) rs.getInt("idUsuario") != null){
+                            user.setId(rs.getInt("idUsuario"));
+                        }
+                }
+                conn.close();
+                con = new Conexao();
+		Class.forName(con.getDriver());
+		conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
+                if((Integer)user.getId() != null){
+                    String query = " insert into Contato (nome, Numero, contato_usuario, id_usuario)"
+				+ " values (?, ?, ?, ?)";
+                    PreparedStatement preparedStmt = conn.prepareStatement(query);
+                    preparedStmt.setString (1, contato.getNome());
+                    preparedStmt.setInt (2, contato.getTelefone());
+                    preparedStmt.setInt (3, user.getId());
+                    preparedStmt.setInt (4, usuario.getId());
+                    preparedStmt.execute();
+                }
+                else{*/
+        String query = " insert into Contato (nome, Numero, id_usuario)"
+                + " values (?, ?, ?)";
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.setString(1, contato.getNome());
+        preparedStmt.setInt(2, contato.getTelefone());
+        preparedStmt.setInt(3, contato.getId_usuario());
+        preparedStmt.execute();
+        //}
+        conn.close();
+        return true;
 
-		} catch (SQLException e) {
-			
-			JOptionPane.showMessageDialog(null, "Erro ao salvar: "+ e);
-			
-		} finally {
-			
-			Conexao.closeConnection(con, stmt);
-			
-		}
-	}
-	
-	public List<Contato> read() {
-		
-		Connection con = Conexao.getConnection();
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		
-		List<Contato> contatos = new ArrayList<>();
-		
-		try {
-			stmt = con.prepareStatement("SELECT * FROM mymemories.contato");
-			rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				
-				Contato c = new Contato();
-				
-				c.setId(rs.getInt("idContato"));
-				c.setNome(rs.getString("Nome"));
-				c.setTelefone(rs.getInt("Numero"));
-				c.setContato_usuario(rs.getInt("contato_usuario"));
-				c.setId_usuario(rs.getInt("id_usuario"));
-				contatos.add(c);
-				
-			}
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} finally {
-			Conexao.closeConnection(con, stmt, rs);
-		}
-		
-		return contatos;
-		
-		
-	}
-	
-	public java.sql.Date convertUtilDateToSqlDate( String str) {
+    }
 
-		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    public void listarContatos2() {
+        try {
+            String query = "SELECT * FROM mymemories.contato;";
+            this.rs = stmt.executeQuery(query);
+            this.stmt = this.conn.createStatement();
 
-		java.util.Date dataUtil = new java.util.Date(); 
-		try { 
-			dataUtil = df.parse( str ); 
-		} 
-		catch (Exception ex) {
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getString("idContato") + " Nome: " + rs.getString("nome") + " Telefone: " + rs.getString("numero"));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-		} java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+    public ArrayList<Contato> listarContatos(Usuario usuario) {
+        ArrayList<Contato> contatos = new ArrayList<>();
+        try {
+            Conexao dados_con = new Conexao();
+            Class.forName(dados_con.getDriver());
+            try (Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha())) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs;
 
-		return dataSql; 
-		} 
+                rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + usuario.getId() + "'");
+
+                while (rs.next()) {
+                    Contato contato = new Contato();
+                    contato.setId(rs.getInt("idContato"));
+                    contato.setNome(rs.getString("nome"));
+                    contato.setTelefone((int) rs.getInt("Numero"));
+                    contato.setContato_usuario(rs.getInt("contato_usuario"));
+                    contato.setId_usuario(rs.getInt("id_usuario"));
+                    if (contato.getContato_usuario() != null) {
+                        contato.setAtivo(true);
+                    }
+                    contatos.add(contato);
+                }
+                conn.close();
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Erro ao carregar os dados: " + e);
+        }
+        return contatos;
+    }
+
+    public boolean deletarContato(Contato contato) throws ClassNotFoundException, SQLException {
+        Conexao con = new Conexao();
+        Class.forName(con.getDriver());
+        Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
+        String query = " delete from Contato where nome='" + contato.getNome() +"'";
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.executeUpdate();
+        return true;
+    }
+
+    public boolean editarContoto(Contato contato) {
+        try {
+
+            Conexao dados_con = new Conexao();
+            Class.forName(dados_con.getDriver());
+            Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha());
+            String query = "update Contato set Nome=?, Numero=? where idContato='" + contato.getId() + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, contato.getNome());
+            preparedStmt.setInt(2, contato.getTelefone());
+            preparedStmt.executeUpdate();
+            conn.close();
+            return true;
+        } catch (HeadlessException | ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Contato não alterado: " + e);
+        }
+    }
+
+    public ArrayList<Contato> listarContatosUsuarios(Usuario usuario) throws ClassNotFoundException, SQLException {
+        ArrayList<Contato> contatos = new ArrayList<>();
+        Conexao con = new Conexao();
+        Class.forName(con.getDriver());
+        Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
+        Statement stmt = conn.createStatement();
+        ResultSet rs;
+        rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + usuario.getId() + "' AND contato_usuario <> null ");
+        while (rs.next()) {
+            Contato contato = new Contato();
+            contato.setId(rs.getInt("id"));
+            contato.setNome(rs.getString("nome"));
+            contato.setTelefone((int) rs.getInt("Numero"));
+            contato.setContato_usuario(rs.getInt("contato_usuario"));
+            contato.setId_usuario(rs.getInt("id_usuario"));
+            if (contato.getContato_usuario() != null) {
+                contato.setAtivo(true);
+            }
+            contatos.add(contato);
+        }
+        conn.close();
+        return contatos;
+    }
+
+    public Contato getContato(Usuario usuario, String nome) throws SQLException, ClassNotFoundException {
+        Contato contato = new Contato();
+        Conexao con = new Conexao();
+        Class.forName(con.getDriver());
+        Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
+        Statement stmt = conn.createStatement();
+        ResultSet rs;
+        rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + usuario.getId() + "' AND Nome ='" + nome + "'");
+
+        if (rs.next()) {
+            contato.setId(rs.getInt("idContato"));
+            contato.setNome(rs.getString("nome"));
+            contato.setTelefone((int) rs.getInt("Numero"));
+            contato.setContato_usuario(rs.getInt("contato_usuario"));
+            contato.setId_usuario(rs.getInt("id_usuario"));
+            if (contato.getContato_usuario() != null) {
+                contato.setAtivo(true);
+            }
+        }
+        conn.close();
+        return contato;
+    }
+
 }
