@@ -83,8 +83,9 @@ public class Main {
                     System.out.println("8) Listar contatos"); // check
                     System.out.println("9) Editar dados da conta"); // check
                     System.out.println("10) Deletar sua conta"); // check
-                    System.out.println("11) Compartilhar Lembrança"); // 
-                    System.out.println("12) Sair"); // check
+                    System.out.println("11) Compartilhar Lembrança"); //
+                    System.out.println("12) Lembretes"); //
+                    System.out.println("13) Sair"); // check
 
                     System.out.print("\nDigite uma opÃ§Ã£o: ");
                     n = sc.nextInt();
@@ -527,7 +528,21 @@ public class Main {
                         	System.out.println("Escolha uma lembrança:");
                         	sc = new Scanner(System.in);
                         	n3 = sc.nextInt();
+                        
                         case 12:
+                        	System.out.println("Escolha um dia: ");
+                        	sc = new Scanner(System.in);
+                        	String dia = sc.next();
+                            System.out.println("Escolha um mês: ");
+                            sc = new Scanner(System.in);
+                            String mes = sc.next();
+                            System.out.println("Lembretes da data " + dia+"/"+mes+":");
+                            for (Lembranca l : lembrancaDao.listarLembretes(usuario, dia, mes)) {
+                                System.out.println(l.getTitulo()+" "+l.getData());
+                            }
+                            break;
+                        	
+                        case 13:
                             c = false;
                             login = false;
                             System.out.println("Você realizou logout -_-");
