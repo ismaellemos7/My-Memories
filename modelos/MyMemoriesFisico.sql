@@ -131,3 +131,6 @@ SELECT c.Nome, cl.Lembranca_idLembranca FROM Contato c JOIN contatoemlembranca c
 SELECT u.nome, l.titulo FROM Usuario u JOIN Lembranca l ON u.idusuario = l.dono_lembranca;
 SELECT l.titulo, tl.nome FROM lembranca l JOIN tipo_lembranca tl ON l.tipo_de_lembranca = tl.idtipo;
 SELECT u.nome, c.nome FROM Usuario u JOIN Contato c ON u.idusuario = c.id_usuario WHERE u.nome = 'jose';
+SELECT l.titulo, c.nome FROM Lembranca l JOIN contatoemlembranca cl JOIN contato c WHERE l.idLembranca = cl.Lembranca_idLembranca AND cl.Contato_idContato = c.idContato;
+SELECT * FROM contatoemlembranca cl JOIN contato c JOIN usuario u WHERE cl.Contato_idContato = c.idContato AND c.id_usuario = u.idUsuario AND u.idUsuario = 3;
+SELECT * FROM contatoemlembranca cl JOIN lembranca l JOIN usuario u WHERE l.Dono_lembranca = u.idUsuario AND u.idUsuario = 6;
