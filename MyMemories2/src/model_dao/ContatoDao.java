@@ -141,7 +141,7 @@ public class ContatoDao {
         Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
         Statement stmt = conn.createStatement();
         ResultSet rs;
-        rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + usuario.getId() + "' AND contato_usuario <> null ");
+        rs = stmt.executeQuery("SELECT * FROM Contato Where id_usuario='" + usuario.getId() + "' AND contato_usuario IS NOT null ");
         while (rs.next()) {
             Contato contato = new Contato();
             contato.setId(rs.getInt("id"));
