@@ -10,7 +10,7 @@ import model_dao.*;
 public class Main {
 
     public static void main(String[] args) throws Throwable {
-        
+
         UsuarioDao usuarioDao = new UsuarioDao();
         LembrancaDao lembrancaDao = new LembrancaDao();
         ContatoDao contatoDao = new ContatoDao();
@@ -19,15 +19,16 @@ public class Main {
         Usuario usuario = null;
         int n, n2, n3;
         while (login == false) {
+
             System.out.println("1) Realizar Login"); // check
             System.out.println("2) Cadastrar Usuario"); // check
             System.out.println("3) Encerrar Programa"); // check
-            System.out.print("\nDigite uma opção: ");
+            System.out.print("\nDigite uma opï¿½ï¿½o: ");
             n2 = sc.nextInt();
             System.out.print("\n\n");
             switch (n2) {
                 case 1:
-                    System.out.print("Número de telefone: ");
+                    System.out.print("Nï¿½mero de telefone: ");
                     sc = new Scanner(System.in);
                     int telefone = sc.nextInt();
                     System.out.print("Senha: ");
@@ -35,7 +36,7 @@ public class Main {
                     String password = sc.nextLine();
                     usuario = usuarioDao.autenticarUsuario(telefone, password);
                     if (usuario == null) {
-                        System.out.println("Você inserio um número ou senha invalido");
+                        System.out.println("Vocï¿½ inserio um nï¿½mero ou senha invalido");
                     } else {
                         login = true;
                     }
@@ -69,7 +70,7 @@ public class Main {
                     login = true;
                     System.out.println("O programa foi encerrado -_-");
                 default:
-                    System.out.println("Opção inválida");
+                    System.out.println("Opï¿½ï¿½o invï¿½lida");
             }
             if (login == true) {
                 while (c) {
@@ -83,7 +84,7 @@ public class Main {
                     System.out.println("8) Listar contatos"); // check
                     System.out.println("9) Editar dados da conta"); // check
                     System.out.println("10) Deletar sua conta"); // check
-                    System.out.println("11) Compartilhar Lembrança"); //
+                    System.out.println("11) Marcar Amigo"); //
                     System.out.println("12) Lembretes"); //
                     System.out.println("13) Sair"); // check
 
@@ -94,7 +95,7 @@ public class Main {
                     switch (n) {
                         case 1:
                             System.out.println("========== Criar nova lembranÃ§a ==========");
-                            System.out.println("\tTipo de Lembrança");
+                            System.out.println("\tTipo de Lembranï¿½a");
                             System.out.println("1) Data Comemorativa");
                             System.out.println("2) Evento");
                             System.out.println("3) Com Amigos");
@@ -127,6 +128,7 @@ public class Main {
                             sc = new Scanner(System.in);
                             String local = sc.nextLine();
                             Tipo_Lembranca tipo = new Tipo_Lembranca();
+                            System.out.println(da);
 
                             switch (n) {
                                 case 1:
@@ -394,8 +396,7 @@ public class Main {
                             if (rl.charAt(0) == 83 || rd.charAt(0) == 83 || rtex.charAt(0) == 83 || r.charAt(0) == 83) {
                                 lembrancaDao.editarLembranca(lembranca, tit);
                                 System.out.println("LembranÃ§a editada com sucesso");
-                            }
-                            else{
+                            } else {
                                 System.out.println("NÃ£o houve alteraÃ§Ãµes");
                             }
                             break;
@@ -519,36 +520,40 @@ public class Main {
                             }
                             break;
                         case 11:
-                        	System.out.println("Listando suas lembranças:");
-                        	int cont = 0;
-                        	for (Lembranca l : lembrancaDao.listarTodasLembrancas(usuario)) {
-                        		cont++;
-                                System.out.println(cont + " " + l.getTitulo());
+                            System.out.println("Listando todas as LembranÃ§as:");
+                            for (Lembranca l : lembrancaDao.listarTodasLembrancas(usuario)) {
+                                System.out.println(l.getTitulo());
                             }
-                        	System.out.println("Escolha uma lembrança:");
-                        	sc = new Scanner(System.in);
-                        	n3 = sc.nextInt();
-                        
+                            System.out.println("Escolha um tÃ­tulo de LembranÃ§a: ");
+                            sc = new Scanner(System.in);
+                            String Lembranca = sc.next();
+                            for (Contato ct : contatoDao.listarContatosUsuarios(usuario)) {
+                                System.out.println(ct.getNome());
+                            }
+                            System.out.println("Escolha um contato: ");
+                            sc = new Scanner(System.in);
+                            String Contato = sc.next();
+
                         case 12:
-                        	System.out.println("Escolha um dia: ");
-                        	sc = new Scanner(System.in);
-                        	String dia = sc.next();
-                            System.out.println("Escolha um mês: ");
+                            System.out.println("Escolha um dia: ");
+                            sc = new Scanner(System.in);
+                            String dia = sc.next();
+                            System.out.println("Escolha um mï¿½s: ");
                             sc = new Scanner(System.in);
                             String mes = sc.next();
-                            System.out.println("Lembretes da data " + dia+"/"+mes+":");
+                            System.out.println("Lembretes da data " + dia + "/" + mes + ":");
                             for (Lembranca l : lembrancaDao.listarLembretes(usuario, dia, mes)) {
-                                System.out.println(l.getTitulo()+" "+l.getData());
+                                System.out.println(l.getTitulo() + " " + l.getData());
                             }
                             break;
-                        	
+
                         case 13:
                             c = false;
                             login = false;
-                            System.out.println("Você realizou logout -_-");
+                            System.out.println("Vocï¿½ realizou logout -_-");
                             break;
                         default:
-                            System.out.println("\nOpção invalida\n");
+                            System.out.println("\nOpï¿½ï¿½o invalida\n");
                     }
 
                 }
