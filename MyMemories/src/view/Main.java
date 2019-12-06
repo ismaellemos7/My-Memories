@@ -10,24 +10,25 @@ import model_dao.*;
 public class Main {
 
     public static void main(String[] args) throws Throwable {
-        String teste1 = "ismael", teste2 = "12345";
+
         UsuarioDao usuarioDao = new UsuarioDao();
         LembrancaDao lembrancaDao = new LembrancaDao();
         ContatoDao contatoDao = new ContatoDao();
         Scanner sc = new Scanner(System.in);
         boolean c = true, login = false;
         Usuario usuario = null;
-        int n, n2;
+        int n, n2, n3;
         while (login == false) {
-            System.out.println("1) Realizar Login"); // feito
-            System.out.println("2) Cadastrar Usuario"); // feito
-            System.out.println("3) Encerrar Programa"); // feito
-            System.out.print("\nDigite uma opção: ");
+
+            System.out.println("1) Realizar Login"); // check
+            System.out.println("2) Cadastrar Usuario"); // check
+            System.out.println("3) Encerrar Programa"); // check
+            System.out.print("\nDigite uma op��o: ");
             n2 = sc.nextInt();
             System.out.print("\n\n");
             switch (n2) {
                 case 1:
-                    System.out.print("Número de telefone: ");
+                    System.out.print("N�mero de telefone: ");
                     sc = new Scanner(System.in);
                     int telefone = sc.nextInt();
                     System.out.print("Senha: ");
@@ -35,7 +36,7 @@ public class Main {
                     String password = sc.nextLine();
                     usuario = usuarioDao.autenticarUsuario(telefone, password);
                     if (usuario == null) {
-                        System.out.println("Você inserio um número ou senha invalido");
+                        System.out.println("Voc� inserio um n�mero ou senha invalido");
                     } else {
                         login = true;
                     }
@@ -69,21 +70,24 @@ public class Main {
                     login = true;
                     System.out.println("O programa foi encerrado -_-");
                 default:
-                    System.out.println("Opção invalida");
+                    System.out.println("Op��o inv�lida");
             }
             if (login == true) {
                 while (c) {
-                    System.out.println("1) Criar nova Lembrança"); // feito
-                    System.out.println("2) Listar Lembranças"); // feito
-                    System.out.println("3) Deletar Lembrança"); // feito
-                    System.out.println("4) Editar Lembrança"); // feito
-                    System.out.println("5) Criar novo contato"); // feito
-                    System.out.println("6) Editar contato"); // feito
-                    System.out.println("7) Deletar contato"); // feito
-                    System.out.println("8) Listar contatos"); // feito
-                    System.out.println("9) Editar dados da conta"); // feito
-                    System.out.println("10) Deletar sua conta"); // feito
-                    System.out.println("11) Sair"); // feito
+                    System.out.println("1) Criar nova Lembrança"); // check
+                    System.out.println("2) Listar Lembranças"); // check
+                    System.out.println("3) Deletar Lembrança"); // check
+                    System.out.println("4) Editar Lembrança"); // check
+                    System.out.println("5) Criar novo contato"); // check
+                    System.out.println("6) Editar contato"); // check
+                    System.out.println("7) Deletar contato"); // check
+                    System.out.println("8) Listar contatos"); // check
+                    System.out.println("9) Editar dados da conta"); // check
+                    System.out.println("10) Deletar sua conta"); // check
+                    System.out.println("11) Marcar Amigo"); //
+                    System.out.println("12) Lembretes"); // check
+                    System.out.println("13) Compartilhar Lembran�a"); // 
+                    System.out.println("14) Sair"); // check
 
                     System.out.print("\nDigite uma opção: ");
                     n = sc.nextInt();
@@ -92,7 +96,7 @@ public class Main {
                     switch (n) {
                         case 1:
                             System.out.println("========== Criar nova lembrança ==========");
-                            System.out.println("\tTipo de Lembrança");
+                            System.out.println("\tTipo de Lembran�a");
                             System.out.println("1) Data Comemorativa");
                             System.out.println("2) Evento");
                             System.out.println("3) Com Amigos");
@@ -116,7 +120,7 @@ public class Main {
                                 System.out.println("Data");
                                 String date = sc.next();
                                 DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                Date d = data.parse(date);
+                                //Date d = data.parse(date);
                                 da = data.parse(date);
                             } catch (Exception ex) {
                                 ex.printStackTrace();
@@ -125,6 +129,7 @@ public class Main {
                             sc = new Scanner(System.in);
                             String local = sc.nextLine();
                             Tipo_Lembranca tipo = new Tipo_Lembranca();
+                            System.out.println(da);
 
                             switch (n) {
                                 case 1:
@@ -372,7 +377,7 @@ public class Main {
                                     System.out.println("Data");
                                     String date = sc.next();
                                     DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-                                    Date d = data.parse(date);
+                                    //Date d = data.parse(date);
                                     da = data.parse(date);
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
@@ -392,8 +397,7 @@ public class Main {
                             if (rl.charAt(0) == 83 || rd.charAt(0) == 83 || rtex.charAt(0) == 83 || r.charAt(0) == 83) {
                                 lembrancaDao.editarLembranca(lembranca, tit);
                                 System.out.println("Lembrança editada com sucesso");
-                            }
-                            else{
+                            } else {
                                 System.out.println("Não houve alterações");
                             }
                             break;
@@ -517,12 +521,73 @@ public class Main {
                             }
                             break;
                         case 11:
+                        	Contato con = new Contato();
+                        	Lembranca lem = new Lembranca();
+                            System.out.println("Listando todas as Lembranças:");
+                            for (Lembranca l : lembrancaDao.listarTodasLembrancas(usuario)) {
+                                System.out.println(l.getTitulo());
+                            }
+                            System.out.println("Escolha um título de Lembrança: ");
+                            sc = new Scanner(System.in);
+                            String nomeLembranca = sc.next();
+                            
+                            lem = lembrancaDao.getLembranca(usuario, nomeLembranca);
+                            
+                            System.out.println("Listando Contatos: ");
+                            for (Contato ct : contatoDao.listarContatosUsuarios(usuario)) {
+                                System.out.println(ct.getNome());
+                            }
+                            System.out.println("Escolha um contato: ");
+                            sc = new Scanner(System.in);
+                            String nomeContato1 = sc.next();
+                            
+                            con = contatoDao.getContato(usuario, nomeContato1);
+                            
+                            ContatoEmLembrancaDao contatoLembranca = new ContatoEmLembrancaDao();
+                            contatoLembranca.MarcarAmigo(lem, con);
+
+                        case 12:
+                        	String now = new Date(System.currentTimeMillis()).toString();
+                        	
+                            System.out.println("Listando Lembretes:");
+                            for (Lembranca l : lembrancaDao.listarLembretes(usuario, now)) {
+                                System.out.println(l.getTitulo() + " " + l.getData());
+                            }
+                            break;
+
+                        case 13:
+                        	Contato conC = new Contato();
+                        	Lembranca lemC = new Lembranca();
+                            System.out.println("Listando todas as Lembranças:");
+                            for (Lembranca l : lembrancaDao.listarTodasLembrancas(usuario)) {
+                                System.out.println(l.getTitulo());
+                            }
+                            System.out.println("Escolha um título de Lembrança: ");
+                            sc = new Scanner(System.in);
+                            String nomeLembrancaC = sc.next();
+                            
+                            lem = lembrancaDao.getLembranca(usuario, nomeLembrancaC);
+                            
+                            System.out.println("Listando Contatos: ");
+                            for (Contato ct : contatoDao.listarContatosUsuarios(usuario)) {
+                                System.out.println(ct.getNome());
+                            }
+                            System.out.println("Escolha um contato: ");
+                            sc = new Scanner(System.in);
+                            String nomeContatoC = sc.next();
+                            
+                            con = contatoDao.getContato(usuario, nomeContatoC);
+                            
+                            ContatoEmLembrancaDao contatoLembrancaC = new ContatoEmLembrancaDao();
+                            contatoLembrancaC.CompartilharLembranca(lem, con);
+                            
+                        case 14:
                             c = false;
                             login = false;
-                            System.out.println("Você realizou logout -_-");
+                            System.out.println("Voc� realizou logout -_-");
                             break;
                         default:
-                            System.out.println("\nOpção invalida\n");
+                            System.out.println("\nOp��o invalida\n");
                     }
 
                 }

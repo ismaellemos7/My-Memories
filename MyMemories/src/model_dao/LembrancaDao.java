@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import model.Contato;
 
 import model.Lembranca;
 import model.Usuario;
@@ -73,6 +72,35 @@ public class LembrancaDao {
             throw new RuntimeException("Erro ao carregar os dados: " + e);
         }
         return lembrancas;
+    }
+    
+    public ArrayList<Lembranca> listarLembretes(Usuario usuario, String hoje) {
+        ArrayList<Lembranca> lembretes = new ArrayList<>();
+        try {
+            Conexao dados_con = new Conexao();
+            Class.forName(dados_con.getDriver());
+            try (Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha())) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs;
+                Date dataAtual = convertUtilDateToSqlDate(hoje);
+                rs = stmt.executeQuery("SELECT * FROM Lembranca Where dono_lembranca='" + usuario.getId() + "' and Data = '" + dataAtual + "'");
+
+                while (rs.next()) {
+                    Lembranca lembrete = new Lembranca();
+                    lembrete.setIdLembranca(rs.getInt("idLembranca"));
+                    lembrete.setTitulo(rs.getString("Titulo"));
+                    lembrete.setTexto(rs.getString("Texto"));
+                    lembrete.setData(rs.getDate("Data"));
+                    lembrete.setLocal(rs.getString("Local"));
+                    lembretes.add(lembrete);
+                }
+                conn.close();
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Erro ao carregar os dados: " + e);
+        }
+        return lembretes;
     }
 
     public ArrayList<Lembranca> listarTodasLembrancas(Usuario usuario) {
