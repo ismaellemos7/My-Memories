@@ -74,7 +74,7 @@ public class LembrancaDao {
         return lembrancas;
     }
     
-    public ArrayList<Lembranca> listarLembretes(Usuario usuario, String dia, String mes) {
+    public ArrayList<Lembranca> listarLembretes(Usuario usuario, String hoje) {
         ArrayList<Lembranca> lembretes = new ArrayList<>();
         try {
             Conexao dados_con = new Conexao();
@@ -82,8 +82,8 @@ public class LembrancaDao {
             try (Connection conn = DriverManager.getConnection(dados_con.getUrl(), dados_con.getUser(), dados_con.getSenha())) {
                 Statement stmt = conn.createStatement();
                 ResultSet rs;
-
-                rs = stmt.executeQuery("SELECT * FROM Lembranca Where dono_lembranca='" + usuario.getId() + "' and DAY(Data) = '" + dia + "' and MONTH(Data) = '" + mes + "'");
+                Date dataAtual = convertUtilDateToSqlDate(hoje);
+                rs = stmt.executeQuery("SELECT * FROM Lembranca Where dono_lembranca='" + usuario.getId() + "' and Data = '" + dataAtual + "'");
 
                 while (rs.next()) {
                     Lembranca lembrete = new Lembranca();

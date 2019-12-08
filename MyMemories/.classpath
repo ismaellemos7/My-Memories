@@ -5,6 +5,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/20182014040026/Desktop/My-Memories/MyMemories/mysql-connector-java-8.0.15.jar"/>
 	<classpathentry kind="output" path="bin"/>

@@ -14,7 +14,7 @@ import model.Lembranca;
 
 public class ContatoEmLembrancaDao {
 	
-	public boolean CompartilharLembranca(Lembranca lembranca, Contato contato) throws ClassNotFoundException, SQLException {
+	public boolean MarcarAmigo(Lembranca lembranca, Contato contato) throws ClassNotFoundException, SQLException {
 		Conexao con = new Conexao();
         Class.forName(con.getDriver());
         Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
@@ -29,7 +29,7 @@ public class ContatoEmLembrancaDao {
 		return true;
 	}
 	
-	public ArrayList<ContatoLembranca> listarContatoEmLembrancas(Lembranca lembranca, Contato contato) {
+	/*public ArrayList<ContatoLembranca> listarContatoEmLembrancas(Lembranca lembranca, Contato contato) {
         ArrayList<ContatoLembranca> ContatoEmLembranca = new ArrayList<>();
         try {
             Conexao dados_con = new Conexao();
@@ -53,6 +53,26 @@ public class ContatoEmLembrancaDao {
             throw new RuntimeException("Erro ao carregar os dados: " + e);
         }
         return ContatoEmLembranca;
-    }
+    }*/
+	
+	public boolean CompartilharLembranca(Lembranca lembranca, Contato contato) throws ClassNotFoundException, SQLException {
+		
+		Conexao con = new Conexao();
+        Class.forName(con.getDriver());
+        Connection conn = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getSenha());
+        String query = " insert into Lembranca (Titulo, Texto, Data, Local, Dono_lembranca, Tipo_de_lembranca)"
+                + " values (?, ?, ?, ?, ?, ? )";
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.setString(1, lembranca.getTitulo());
+        preparedStmt.setString(2, lembranca.getTexto());
+        preparedStmt.setDate(3, new java.sql.Date(lembranca.getData().getTime()));
+        preparedStmt.setString(4, lembranca.getLocal());
+        preparedStmt.setInt(5, contato.getContato_usuario());
+        preparedStmt.setInt(6, 4);
+        preparedStmt.execute();
+        conn.close();
+		
+		return true;
+	}
 	
 }

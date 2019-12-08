@@ -84,9 +84,10 @@ public class Main {
                     System.out.println("8) Listar contatos"); // check
                     System.out.println("9) Editar dados da conta"); // check
                     System.out.println("10) Deletar sua conta"); // check
-                    System.out.println("11) Marcar Amigo"); //
-                    System.out.println("12) Lembretes"); //
-                    System.out.println("13) Sair"); // check
+                    System.out.println("11) Marcar Amigo"); //check
+                    System.out.println("12) Lembretes"); // check
+                    System.out.println("13) Compartilhar Lembran�a"); //check 
+                    System.out.println("14) Sair"); // check
 
                     System.out.print("\nDigite uma opção: ");
                     n = sc.nextInt();
@@ -520,34 +521,68 @@ public class Main {
                             }
                             break;
                         case 11:
+                        	Contato con = new Contato();
+                        	Lembranca lem = new Lembranca();
                             System.out.println("Listando todas as Lembranças:");
                             for (Lembranca l : lembrancaDao.listarTodasLembrancas(usuario)) {
                                 System.out.println(l.getTitulo());
                             }
                             System.out.println("Escolha um título de Lembrança: ");
                             sc = new Scanner(System.in);
-                            String Lembranca = sc.next();
+                            String nomeLembranca = sc.next();
+                            
+                            lem = lembrancaDao.getLembranca(usuario, nomeLembranca);
+                            
+                            System.out.println("Listando Contatos: ");
                             for (Contato ct : contatoDao.listarContatosUsuarios(usuario)) {
                                 System.out.println(ct.getNome());
                             }
                             System.out.println("Escolha um contato: ");
                             sc = new Scanner(System.in);
-                            String Contato = sc.next();
+                            String nomeContato1 = sc.next();
+                            
+                            con = contatoDao.getContato(usuario, nomeContato1);
+                            
+                            ContatoEmLembrancaDao contatoLembranca = new ContatoEmLembrancaDao();
+                            contatoLembranca.MarcarAmigo(lem, con);
+                            break;
 
                         case 12:
-                            System.out.println("Escolha um dia: ");
-                            sc = new Scanner(System.in);
-                            String dia = sc.next();
-                            System.out.println("Escolha um m�s: ");
-                            sc = new Scanner(System.in);
-                            String mes = sc.next();
-                            System.out.println("Lembretes da data " + dia + "/" + mes + ":");
-                            for (Lembranca l : lembrancaDao.listarLembretes(usuario, dia, mes)) {
+                        	String now = new Date(System.currentTimeMillis()).toString();
+                        	
+                            System.out.println("Listando Lembretes:");
+                            for (Lembranca l : lembrancaDao.listarLembretes(usuario, now)) {
                                 System.out.println(l.getTitulo() + " " + l.getData());
                             }
                             break;
 
                         case 13:
+                        	Contato conC = new Contato();
+                        	Lembranca lemC = new Lembranca();
+                            System.out.println("Listando todas as Lembranças:");
+                            for (Lembranca l : lembrancaDao.listarTodasLembrancas(usuario)) {
+                                System.out.println(l.getTitulo());
+                            }
+                            System.out.println("Escolha um título de Lembrança: ");
+                            sc = new Scanner(System.in);
+                            String nomeLembrancaC = sc.next();
+                            
+                            lem = lembrancaDao.getLembranca(usuario, nomeLembrancaC);
+                            
+                            System.out.println("Listando Contatos: ");
+                            for (Contato ct : contatoDao.listarContatosUsuarios(usuario)) {
+                                System.out.println(ct.getNome());
+                            }
+                            System.out.println("Escolha um contato: ");
+                            sc = new Scanner(System.in);
+                            String nomeContatoC = sc.next();
+                            
+                            con = contatoDao.getContato(usuario, nomeContatoC);
+                            
+                            ContatoEmLembrancaDao contatoLembrancaC = new ContatoEmLembrancaDao();
+                            contatoLembrancaC.CompartilharLembranca(lem, con);
+                            break;
+                        case 14:
                             c = false;
                             login = false;
                             System.out.println("Voc� realizou logout -_-");
