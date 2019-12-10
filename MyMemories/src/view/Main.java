@@ -86,7 +86,7 @@ public class Main {
                     System.out.println("10) Deletar sua conta"); // check
                     System.out.println("11) Marcar Amigo"); //
                     System.out.println("12) Lembretes"); // check
-                    System.out.println("13) Compartilhar Lembran�a"); // 
+                    System.out.println("13) Compartilhar Lembran�a"); // 
                     System.out.println("14) Sair"); // check
 
                     System.out.print("\nDigite uma opção: ");
@@ -545,6 +545,7 @@ public class Main {
                             
                             ContatoEmLembrancaDao contatoLembranca = new ContatoEmLembrancaDao();
                             contatoLembranca.MarcarAmigo(lem, con);
+                            break;
 
                         case 12:
                         	String now = new Date(System.currentTimeMillis()).toString();
@@ -580,14 +581,15 @@ public class Main {
                             
                             ContatoEmLembrancaDao contatoLembrancaC = new ContatoEmLembrancaDao();
                             contatoLembrancaC.CompartilharLembranca(lem, con);
+                            break;
                             
                         case 14:
                             c = false;
                             login = false;
-                            System.out.println("Voc� realizou logout -_-");
+                            System.out.println("Você realizou logout -_-");
                             break;
                         default:
-                            System.out.println("\nOp��o invalida\n");
+                            System.out.println("\nOpção inválida\n");
                     }
 
                 }
