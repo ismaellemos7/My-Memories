@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from base.models import User, Person, Address
+from mymemories_app.models import User, Person, Address
 
 class AddressSerializer(serializers.ModelSerializer):
 
